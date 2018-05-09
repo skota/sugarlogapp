@@ -20,7 +20,25 @@ defmodule SugarlogappWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", SugarlogappWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", SugarlogappWeb do
+    pipe_through :api
+
+    #resgister/signup
+    # post "/register", RegisterController, :create  
+
+    #actviate
+
+    #login
+    # post "/login", LoginController, :create  
+    # post "/logout", LogoutController, :logout  
+
+
+    #forgot password
+    # get "/changepassword", LoginController, :password_changed  
+
+    #reset password
+    # get "/resetpassword", PasswordController, :new  
+    # post "/resetpassword", PasswordController, :create  
+
+  end
 end

@@ -40,7 +40,13 @@ defmodule Sugarlogapp.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},      
+      {:timex, "~> 3.0"},
+      {:credo, "~> 0.4", only: [:dev, :test]},
+      {:jose, "~> 1.8"},
+      {:guardian, "~> 0.14"},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 0.12"},
     ]
   end
 
