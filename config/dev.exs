@@ -51,7 +51,7 @@ config :phoenix, :stacktrace_depth, 20
 config :sugarlogapp, Sugarlogapp.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
+  password: "password123",
   database: "sugarlogapp_dev",
   hostname: "localhost",
   pool_size: 10
