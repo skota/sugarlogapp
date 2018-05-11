@@ -23,7 +23,9 @@ defmodule SugarlogappWeb.Router do
   scope "/api", SugarlogappWeb do
     pipe_through :api
 
-    #resgister/signup
+    get "/hello", LoginController, :hello  
+
+    #register/signup
     # post "/register", RegisterController, :create  
 
     #actviate
