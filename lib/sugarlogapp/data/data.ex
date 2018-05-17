@@ -1,19 +1,20 @@
 defmodule SugarlogappWeb.Data do
+
     import Ecto.Query, warn: false
-    alias SugarlogappWeb.Repo.User
+    import Timex.Ecto.DateTime
+    
+    alias SugarlogappWeb.Data.User
     # need password validator
-    import Comeonin.Bcrypt, only: [hashpwsalt: 1]
+    
+    
+    def build_user(attrs \\ %{}) do
+        %User{}
+        |> User.blank_changeset(attrs)
+    end    
 
-
-    #add user schema
-
-    #define changesets
-
-
-    #ensure params passed to changeset have password
-
-
-
-    #change set for update
-
+    def create_user(attrs \\ %{}) do
+        %User{}
+        |> User.changeset(attrs)
+        |> Repo.insert()
+    end
 end    
