@@ -48,10 +48,18 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
+# config :sugarlogapp, Sugarlogapp.Repo,
+#   adapter: Ecto.Adapters.Postgres,
+#   username: "postgres",
+#   password: "password123",
+#   database: "sugarlogapp_dev",
+#   hostname: "localhost",
+#   pool_size: 10
+
+  # Configure your database
 config :sugarlogapp, Sugarlogapp.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "password123",
-  database: "sugarlogapp_dev",
-  hostname: "localhost",
-  pool_size: 10
+      adapter: Ecto.Adapters.MySQL,
+      database: "sugarlogapp",
+      username: "root",
+      password: "root",
+      hostname: "localhost"
