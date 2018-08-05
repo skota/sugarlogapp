@@ -2,13 +2,11 @@
 
 
 ## What is this?
-Sugarlogapp is a simple app to record and track blood sugar levels. The App has 3 layers
+Sugarlogapp is a simple app to record and track blood sugar levels. The app has web and mobile components
 
-
-  * Rest API
-  * An Angular Web front end
-  * Hybrid mobile app powered by Ionic Framework
-
+  * Rest API to power a mobile backend
+  * Mobile app will be built using the awesome flutter sdk.
+  
 ## How do i use this repo?
 To start your Phoenix server: Clone or fork this repo. Then 
 
