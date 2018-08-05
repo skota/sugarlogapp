@@ -1,7 +1,7 @@
-defmodule SugarlogappWeb.Data.User do
+defmodule Sugarlogapp.Data.User do
     use Ecto.Schema
     import Ecto.Changeset
-    alias SugarlogappWeb.Data.User
+    alias Sugarlogapp.Data.User
 
     #brcrypt for hashing password
     import Comeonin.Bcrypt, only: [hashpwsalt: 1] 

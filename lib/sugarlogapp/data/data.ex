@@ -1,10 +1,12 @@
-defmodule SugarlogappWeb.Data do
+defmodule Sugarlogapp.Data do
 
     import Ecto.Query, warn: false
     import Timex.Ecto.DateTime
     
-    alias SugarlogappWeb.Data.User
-    # need password validator
+    # alias the schema
+    alias Sugarlogapp.Data.User
+    alias Sugarlogapp.Repo
+    
     
     
     def build_user(attrs \\ %{}) do
