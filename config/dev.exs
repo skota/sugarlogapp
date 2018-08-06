@@ -55,8 +55,9 @@ config :phoenix, :stacktrace_depth, 20
 #   database: "sugarlogapp_dev",
 #   hostname: "localhost",
 #   pool_size: 10
+# System.get_env("mysql_user") || "root"
 
-  # Configure your database
+# Configure your database
 config :sugarlogapp, Sugarlogapp.Repo,
       adapter: Ecto.Adapters.MySQL,
       database: "sugarlogapp",

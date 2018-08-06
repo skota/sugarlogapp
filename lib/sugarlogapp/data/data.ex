@@ -19,4 +19,7 @@ defmodule Sugarlogapp.Data do
         |> User.changeset(attrs)
         |> Repo.insert()
     end
+
+
+    
 end    

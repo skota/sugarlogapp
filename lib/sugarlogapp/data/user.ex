@@ -51,4 +51,11 @@ defmodule Sugarlogapp.Data.User do
     # |> put_hashed_password
 
 
+    # todo:
+    # validate email
+    # check password strength
+
+    # hash password
+
+
 end

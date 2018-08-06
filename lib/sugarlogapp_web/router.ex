@@ -17,6 +17,14 @@ defmodule SugarlogappWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+
+    # login
+    # activate
+    # forgot password
+    # reset password
+
+    # readings  ( crud)
   end
 
   # Other scopes may use custom stacks.
@@ -43,4 +51,7 @@ defmodule SugarlogappWeb.Router do
     # post "/resetpassword", PasswordController, :create  
 
   end
+  
+  # catch all route
+  # get "/*path", NorouteController, :index
 end
