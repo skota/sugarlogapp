@@ -4,7 +4,10 @@ use Mix.Config
 # you can enable the server option below.
 config :sugarlogapp, SugarlogappWeb.Endpoint,
   http: [port: 4001],
-  server: false
+  server: true
+
+# start hound with chrome headless and chrome driver
+config :hound, driver: "chrome_driver", browser: "chrome_headless"
 
 # Print only warnings and errors during test
 config :logger, level: :warn

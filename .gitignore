@@ -16,3 +16,5 @@ erl_crash.dump
 /config/*.secret.exs
 todo.txt
 /config/prod.secret.exs
+node_modules/
+assets/node_modules

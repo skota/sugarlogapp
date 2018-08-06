@@ -48,6 +48,7 @@ defmodule Sugarlogapp.Mixfile do
       {:guardian, "~> 0.14"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 0.12"},
+      {:hound, "~> 1.0"}
     ]
   end
 
