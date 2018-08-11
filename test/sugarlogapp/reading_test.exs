@@ -1,4 +1,4 @@
-defmodule Sugarlogapp.ReadinTest do
+defmodule Sugarlogapp.ReadingTest do
     use ExUnit.Case  
     alias Sugarlogapp.Data.Reading
     alias Sugarlogapp.Data

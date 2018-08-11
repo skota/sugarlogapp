@@ -3,13 +3,12 @@ defmodule Sugarlogapp.Data do
     import Ecto.Query, warn: false
     import Timex.Ecto.DateTime
     
-    # alias the schema
+    # alias the schema-----------------------
     alias Sugarlogapp.Data.User
     alias Sugarlogapp.Data.Reading
     alias Sugarlogapp.Repo
     
-    
-    # --- users
+    # --- users ------------------------------
     def build_user(attrs \\ %{}) do
         %User{}
         |> User.blank_changeset(attrs)
@@ -20,8 +19,23 @@ defmodule Sugarlogapp.Data do
         |> User.changeset(attrs)
         |> Repo.insert()
     end
+    
+    def activate_user(attrs \\ %{}) do
+        %User{}
+        |> User.activate_changeset(attrs)
+        |> Repo.update()
+    end
 
-    # --- readings
+    # TODO: 1. find user by id
+    # TODO: 2. find user by email
+    # TODO: 3. find user by activation token
+    # TODO: 4. find user by reset token
+    # TODO: 5. find user by email and confirm that password matches
+
+
+
+
+    # --- readings ----------------------------
     #  blank changeset for creating a reading
     def build_reading(attrs \\ %{}) do
         %Reading{}

@@ -18,7 +18,6 @@ defmodule SugarlogappWeb.Router do
 
     get "/", PageController, :index
 
-
     # login
     # activate
     # forgot password
@@ -32,6 +31,7 @@ defmodule SugarlogappWeb.Router do
     pipe_through :api
 
     get "/hello", LoginController, :hello  
+    post "/register", RegisterController, :create  
 
     #register/signup
     # post "/register", RegisterController, :create  
