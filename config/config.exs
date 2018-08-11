@@ -22,7 +22,7 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
-#  config swoosh for sendgrid
+#  config bamboo for sendgrid
 config :sugarlogapp, Sugarlogapp.Mailer,
   adapter: Bamboo.SendGridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY") || 'test12345'
