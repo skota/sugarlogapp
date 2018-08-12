@@ -10,8 +10,8 @@ defmodule SugarlogappWeb.LoginView do
 end
 
 
-  def render("error.json", %{}) do        
-    %{message: "unable to login"}
+  def render("error.json", %{message: message}) do        
+    %{message: message}
   end
 end
   

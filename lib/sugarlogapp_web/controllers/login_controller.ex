@@ -25,7 +25,7 @@ defmodule SugarlogappWeb.LoginController do
             :error ->
                 conn
                 |> put_status(401)
-                |> render("error.json", message: "Could not login")
+                |> render("error.json", message: "Could not login. Invalid username or password")
         end
       end 
 end
