@@ -22,6 +22,11 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
+# guardian config
+config :sugarlogapp, Sugarlogapp.Guardian,
+       issuer: "sugarlogapp",
+       secret_key: "9EnrwmK8CUR+gsuWM6ASgsijZ+aMC2cT04SBQo5wmqBpAFgYBmlGBVSs5Xv46W/D"
+
 #  config bamboo for sendgrid
 config :sugarlogapp, Sugarlogapp.Mailer,
   adapter: Bamboo.SendGridAdapter,

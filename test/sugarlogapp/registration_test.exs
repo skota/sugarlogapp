@@ -70,8 +70,7 @@ defmodule Sugarlopapp.RegistrationTest do
         refute changeset.valid?
     end
 
-    # login
-
+    #login
 
     # forgot password
 

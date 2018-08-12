@@ -45,7 +45,7 @@ defmodule Sugarlogapp.Mixfile do
       {:timex_ecto, "~> 3.1"},
       {:credo, "~> 0.4", only: [:dev, :test]},
       {:jose, "~> 1.8"},
-      {:guardian, "~> 0.14"},
+      {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 0.12"},
       {:hound, "~> 1.0"},

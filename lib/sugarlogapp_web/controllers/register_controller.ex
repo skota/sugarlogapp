@@ -1,6 +1,6 @@
 defmodule SugarlogappWeb.RegisterController do
     use SugarlogappWeb, :controller
-    
+    import Timex.Time    
     alias Sugarlogapp.Repo
     alias Sugarlogapp.Data
     alias Sugarlogapp.Mailer
@@ -21,7 +21,7 @@ defmodule SugarlogappWeb.RegisterController do
       |> put_status(201)
       |> render("activation-sent.json", message: "Success! Your account has been created, You must activate your account before you can log in. Please check your email for activation instructions.")
 
-  end
+    end
   
     def create(conn, %{"register" => user_params}) do
       token = 40
@@ -35,7 +35,7 @@ defmodule SugarlogappWeb.RegisterController do
         params = Map.put(user_params, "activation_token",token)
                 |> Map.put("activation_token_created_at",token_created_at)    
 
-        # move token generation and mail sending to a background job...
+        # TODO move token generation and mail sending to a background job...
         # register should only be concerned with registering a user.. 
 
         case Data.create_user(params) do
@@ -54,6 +54,10 @@ defmodule SugarlogappWeb.RegisterController do
         end
 
 
-    end  
+    end 
+
+    # def activate() do
+        
+    # end
   end
   

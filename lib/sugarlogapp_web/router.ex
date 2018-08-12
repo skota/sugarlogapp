@@ -31,17 +31,13 @@ defmodule SugarlogappWeb.Router do
     pipe_through :api
 
     get "/hello", LoginController, :hello  
+    # registration and activate
     post "/register", RegisterController, :create  
-
-    #register/signup
-    # post "/register", RegisterController, :create  
-
-    #actviate
+    put "/activate/:token", RegisterController, :activate  
 
     #login
-    # post "/login", LoginController, :create  
+    post "/login", LoginController, :create  
     # post "/logout", LogoutController, :logout  
-
 
     #forgot password
     # get "/changepassword", LoginController, :password_changed  

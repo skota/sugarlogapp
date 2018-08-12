@@ -27,13 +27,30 @@ defmodule Sugarlogapp.Data do
     end
 
     # TODO: 1. find user by id
-    # TODO: 2. find user by email
+    def get_user(id), do: Repo.get(User, id)
+    
+    #find user by email
+    # TODO: should check for a/c with matching email and actviated=true
+    def get_user_by_email(email), do: Repo.get_by(User, email: email)
+
+
     # TODO: 3. find user by activation token
     # TODO: 4. find user by reset token
-    # TODO: 5. find user by email and confirm that password matches
+    # find user by email and confirm that password matches
+    def find_and_confirm_password(%{"email" => email, "password" => pass}) do        
+        user = get_user_by_email(email)
 
-
-
+        if user do
+            cond do
+                user && Comeonin.Bcrypt.checkpw(pass, user.password_hash) ->
+                    {:ok, user}
+            true ->
+                :error
+            end
+        else
+            :not_activated
+        end        
+    end
 
     # --- readings ----------------------------
     #  blank changeset for creating a reading
