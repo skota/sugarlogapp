@@ -18,7 +18,7 @@ defmodule Sugarlopapp.RegistrationTest do
         :ok = Ecto.Adapters.SQL.Sandbox.checkout(Sugarlogapp.Repo)
         Ecto.Adapters.SQL.Sandbox.mode(Sugarlogapp.Repo, {:shared, self()})
         :ok
-      end
+    end
     
     test "changeset with valid attributes" do
         changeset = User.changeset(%User{}, @valid_attrs)

@@ -9,6 +9,12 @@ defmodule Sugarlogapp.ReadingTest do
     @invalid_attrs %{user_id: 2, reading: "a", time_of_day: "morning", reading_taken_dt: @reading_dt}
     @not_enough_attrs %{time_of_day: "morning", reading_take_dt: @reading_dt}
 
+    setup do
+        :ok = Ecto.Adapters.SQL.Sandbox.checkout(Sugarlogapp.Repo)
+        Ecto.Adapters.SQL.Sandbox.mode(Sugarlogapp.Repo, {:shared, self()})
+        :ok
+    end
+
     test "changeset with valid attributes" do
         changeset = Reading.changeset(%Reading{}, @valid_attrs)
         assert changeset.valid?
@@ -24,15 +30,11 @@ defmodule Sugarlogapp.ReadingTest do
         refute changeset.valid?
     end
 
-    # test "should be able to create new reading" do
-    #     assert {:ok, _} = Data.create_reading(@valid_attrs)
-    # end    
-
-    test "should be able to fetch readings belonging to user " do
-    
+    test "should be able to create new reading with valid attributes" do
+        assert {:ok, reading} = Data.create_reading(@valid_attrs)
+        assert reading.user_id == 1
+        assert reading.reading == 120
+        assert reading.time_of_day == "morning"        
     end    
 
-    test "should not be able to fetch readings belonging to other users" do
-    
-    end    
 end
