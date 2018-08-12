@@ -13,24 +13,15 @@ defmodule SugarlogappWeb.Router do
     plug :accepts, ["json"]
   end
 
+  # we dont have any browser routes..only api
   scope "/", SugarlogappWeb do
     pipe_through :browser # Use the default browser stack
-
-    get "/", PageController, :index
-
-    # login
-    # activate
-    # forgot password
-    # reset password
-
-    # readings  ( crud)
   end
 
   # Other scopes may use custom stacks.
   scope "/api", SugarlogappWeb do
     pipe_through :api
 
-    get "/hello", LoginController, :hello  
     # registration and activate
     post "/register", RegisterController, :create  
     put "/activate/:token", RegisterController, :activate  
