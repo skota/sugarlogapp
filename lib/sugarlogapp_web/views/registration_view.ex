@@ -1,4 +1,4 @@
-defmodule SugarlogappWeb.RegisterView do
+defmodule SugarlogappWeb.RegistrationView do
     use SugarlogappWeb, :view
 
     def render("activation-sent.json", %{message: message}) do

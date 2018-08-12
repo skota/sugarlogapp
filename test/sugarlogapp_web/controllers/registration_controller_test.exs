@@ -1,4 +1,4 @@
-defmodule SugarlogappWeb.RegisterControllerTest do
+defmodule SugarlogappWeb.RegistrationControllerTest do
     use SugarlogappWeb.ConnCase
     import Timex.Time
 
@@ -26,14 +26,10 @@ defmodule SugarlogappWeb.RegisterControllerTest do
             }
         
             conn =  conn
-                    |> post("/api/activate:token", %{"register" => params})
+                    |> post("/api/register", %{"register" => params})
             
-            %{"errors" => errors} = json_response(conn, 200)
-            
-            # TODO need to pattern match and confirm we error for invalid password
-            # assert Enum.any?(errors, fn error -> error["attribute"] == "password" end)        
-            # assert %{password: ["Invalid Password. Must be atleast 8 chars long. Must contain 1 or more capital letter, 1 number and 1 special character."]} = errors_on(changeset)                        # 
-            
+            assert response(conn, 401)
+            # need to check for actual error message
         end
     end
 

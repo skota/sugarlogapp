@@ -23,8 +23,8 @@ defmodule SugarlogappWeb.Router do
     pipe_through :api
 
     # registration and activate
-    post "/register", RegisterController, :create  
-    put "/activate/:token", RegisterController, :activate  
+    post "/register", RegistrationController, :create  
+    put "/activate/:token", RegistrationController, :activate  
 
     #login
     post "/login", LoginController, :create  

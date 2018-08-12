@@ -1,4 +1,4 @@
-defmodule SugarlogappWeb.RegisterController do
+defmodule SugarlogappWeb.RegistrationController do
     use SugarlogappWeb, :controller
     import Timex.Time    
     alias Sugarlogapp.Repo
@@ -50,7 +50,9 @@ defmodule SugarlogappWeb.RegisterController do
             {:error, changeset} ->
                 #error tell user why use creation failed..
                 # IO.puts inspect changeset
-                render conn, "registration-error.json", changeset: changeset                
+                conn
+                |> put_status(401)
+                |> render "registration-error.json", changeset: changeset                
         end
 
 
