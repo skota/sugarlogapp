@@ -65,14 +65,17 @@ defmodule Sugarlogapp.Data do
         |> Repo.insert()
     end
 
+    def get_readings(user_id) do
+        # Reading
+        # |> Repo.get_by(user_id: user_id)
+
+        Reading 
+        |> Ecto.Query.where(user_id: 2) 
+        |> Repo.all
+    end
+
     # create reading
-
-
     # get readings
-
     # update readings
-
-    # delete readings
-
-    
+    # delete readings    
 end    
