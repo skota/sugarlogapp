@@ -13,8 +13,8 @@ defmodule Sugarlogapp.Guardian do
         {:error, :reason_for_error}
     end
     
-    def resource_from_claims(%{"sub" => id}) do
-        case User.get_user(id) do
+    def resource_from_claims(claims) do
+        case Data.get_user(claims["sub"]) do
             nil -> {:error, :resource_not_found}
             user -> {:ok, user}
         end

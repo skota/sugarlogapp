@@ -1,6 +1,14 @@
 defmodule SugarlogappWeb.Router do
   use SugarlogappWeb, :router
 
+  pipeline :auth do
+    plug Sugarlogapp.Auth.Pipeline
+  end
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -11,6 +19,7 @@ defmodule SugarlogappWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    # plug Guardian.Plug.VerifyHeader, realm: "Bearer"
   end
 
   # we dont have any browser routes..only api
@@ -28,16 +37,23 @@ defmodule SugarlogappWeb.Router do
 
     #login
     post "/login", LoginController, :create  
-    # post "/logout", LogoutController, :logout  
 
+    
     #forgot password
     # get "/changepassword", LoginController, :password_changed  
-
     #reset password
     # get "/resetpassword", PasswordController, :new  
     # post "/resetpassword", PasswordController, :create  
-
   end
+
+  # protected routes
+  scope "/api", SugarlogappWeb do
+    pipe_through [:api, :auth, :ensure_auth]
+
+    #readings
+    resources "/readings", ReadingController
+
+  end  
   
   # catch all route
   # get "/*path", NorouteController, :index
