@@ -13,13 +13,6 @@ config :hound, driver: "chrome_driver", browser: "chrome_headless"
 config :logger, level: :warn
 
 # Configure your database
-# config :sugarlogapp, Sugarlogapp.Repo,
-#   adapter: Ecto.Adapters.Postgres,
-#   username: "postgres",
-#   password: "postgres",
-#   database: "sugarlogapp_test",
-#   hostname: "localhost",
-#   pool: Ecto.Adapters.SQL.Sandbox
 config :sugarlogapp, Sugarlogapp.Repo,
       adapter: Ecto.Adapters.MySQL,
       database: "sugarlogapp_test",

@@ -13,10 +13,6 @@ defmodule SugarlogappWeb.LoginController do
     def create(conn, %{"login" => login_params}) do
         case Data.find_and_confirm_password(login_params) do
             {:ok, user} ->
-                # new_conn = Guardian.Plug.sign_in(conn, user)
-                # jwt = Guardian.Plug.current_token(new_conn)
-                # {:ok, claims} = Guardian.Plug.claims(new_conn)
-                # exp = Map.get(claims, "exp")
                 {:ok, token, full_claims} = Guardian.encode_and_sign(user)
                 exp = Map.get(full_claims, "exp")
 

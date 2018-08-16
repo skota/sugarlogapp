@@ -38,8 +38,9 @@ defmodule Sugarlogapp.Data do
     # TODO: 4. find user by reset token
     # find user by email and confirm that password matches
     def find_and_confirm_password(%{"email" => email, "password" => pass}) do        
-        user = get_user_by_email(email)
 
+        user = get_user_by_email(email)
+        IO.puts inspect user
         if user do
             cond do
                 user && Comeonin.Bcrypt.checkpw(pass, user.password_hash) ->
