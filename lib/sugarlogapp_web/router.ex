@@ -52,7 +52,10 @@ defmodule SugarlogappWeb.Router do
 
     #readings
     resources "/readings", ReadingController
-
+    
+    # reading_path  GET     /api/readings/:id/edit  SugarlogappWeb.ReadingController :edit
+    # reading_path  GET     /api/readings/:id       SugarlogappWeb.ReadingController :show
+    # reading_path  POST    /api/readings           SugarlogappWeb.ReadingController :create
   end  
   
   # catch all route

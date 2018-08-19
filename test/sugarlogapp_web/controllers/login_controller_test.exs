@@ -1,9 +1,6 @@
 defmodule SugarlogappWeb.LoginControllerTest do
     use SugarlogappWeb.ConnCase
-    # import Timex.Time
-    # alias Sugarlogapp.Repo
     alias Sugarlogapp.Data
-    # alias Sugarlogapp.Data.User
 
     setup do
         Data.create_user(%{ first_name: "sriram",last_name: "kota",

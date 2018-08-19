@@ -15,5 +15,16 @@ defmodule SugarlogappWeb.ReadingView do
         }        
     end
 
+    def render("success.json",%{readingid: id, message: message}) do
+        %{  id:         id, 
+            message:    message 
+        }
+    end    
+    
+    def render("error.json", %{changeset: changeset}) do
+        %{errors: translate_errors(changeset)} 
+    end
+
+    
   end
   

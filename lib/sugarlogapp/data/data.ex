@@ -59,7 +59,8 @@ defmodule Sugarlogapp.Data do
         %Reading{}
         |> Reading.blank_changeset(attrs)
     end    
-
+    
+    # create reading
     def create_reading(attrs \\ %{}) do
         %Reading{}
         |> Reading.changeset(attrs)
@@ -75,7 +76,6 @@ defmodule Sugarlogapp.Data do
         |> Repo.all
     end
 
-    # create reading
     # get readings
     # update readings
     # delete readings    
