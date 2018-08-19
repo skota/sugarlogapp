@@ -1,8 +1,7 @@
 defmodule Sugarlogapp.Data do
 
     import Ecto.Query, warn: false
-    import Timex.Ecto.DateTime
-    
+
     # alias the schema-----------------------
     alias Sugarlogapp.Data.User
     alias Sugarlogapp.Data.Reading
@@ -20,11 +19,11 @@ defmodule Sugarlogapp.Data do
         |> Repo.insert()
     end
     
-    def activate_user(attrs \\ %{}) do
-        %User{}
-        |> User.activate_changeset(attrs)
-        |> Repo.update()
-    end
+    # def activate_user(attrs \\ %{}) do
+    #     %User{}
+    #     |> User.activate_changeset(attrs)
+    #     |> Repo.update()
+    # end
 
     # TODO: 1. find user by id
     def get_user(id), do: Repo.get(User, id)
@@ -68,15 +67,21 @@ defmodule Sugarlogapp.Data do
     end
 
     def get_readings(user_id) do
-        # Reading
-        # |> Repo.get_by(user_id: user_id)
-
         Reading 
-        |> Ecto.Query.where(user_id: 2) 
+        |> Ecto.Query.where(user_id: ^user_id) 
         |> Repo.all
     end
 
-    # get readings
+    # get reading
+    def get_reading!(id, user_id) do
+        Reading        
+        |> Repo.get_by(id: id, user_id: user_id)
+    end    
+
     # update readings
     # delete readings    
+    def delete_reading!(reading) do
+        Repo.delete(reading)
+    end
+
 end    

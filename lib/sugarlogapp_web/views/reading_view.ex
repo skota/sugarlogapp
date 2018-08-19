@@ -20,6 +20,10 @@ defmodule SugarlogappWeb.ReadingView do
             message:    message 
         }
     end    
+
+    def render("forbidden.json", %{message: message}) do
+        %{message: message}
+    end    
     
     def render("error.json", %{changeset: changeset}) do
         %{errors: translate_errors(changeset)} 

@@ -1,9 +1,6 @@
 defmodule SugarlogappWeb.RegistrationController do
     use SugarlogappWeb, :controller
-    alias Sugarlogapp.Repo
     alias Sugarlogapp.Data
-    alias Sugarlogapp.Mailer
-    alias Sugarlogapp.Email
     alias Sugarlogapp.Data.User
 
     # defp build_email(conn,token,email) do        
