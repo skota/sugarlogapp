@@ -27,4 +27,15 @@ defmodule Sugarlogapp.Data.Reading do
         |> cast(attrs, @all_fields)        
         |> validate_required(@required_fields)        
     end
+
+    def update_changeset(%Reading{} = reading, attrs) do    
+        reading
+        |> cast(attrs, @all_fields )        
+        # |> validate_number(:reading, greater_than: 0)
+        
+        # |> validate_number(:consistency, greater_than: 0)
+        # |> validate_inclusion(:measurement, ~w(ml cc oz))      
+      end
+
+
 end

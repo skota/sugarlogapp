@@ -19,8 +19,8 @@ defmodule SugarlogappWeb.ReadingController do
         # get current user id
         current_user = Guardian.Plug.current_resource(conn)
         
-        reading_taken_dt = Map.get(reading_params,"reading_taken_dt")
-        reading_taken_at = convert_string_to_datetime(reading_taken_dt)    
+        reading_taken_at = Map.get(reading_params,"reading_taken_dt")
+                           |>  convert_string_to_datetime()    
 
         reading_attributes = %{"user_id" => current_user.id,
                          "reading" => Map.get(reading_params,"reading"), 
@@ -56,7 +56,32 @@ defmodule SugarlogappWeb.ReadingController do
 
     end
 
+    def update(conn, %{"id" => id,"reading" => reading}) do
+        # send_resp(conn, :no_content, "")
+        # find 
+        user = Guardian.Plug.current_resource(conn)
+        user_reading = Data.get_reading!(id, user.id)
+       
+        params = %{"reading" => reading}
 
+        case Data.update_reading!(user_reading, reading) do
+            {:ok, reading} ->          
+                conn
+                |> put_status(200)      
+                |> render( "update.json", message: "Updated reading")  
+            {:error, changeset} ->            
+                conn
+                |> put_status(401)
+                |> render("error.json", changeset: changeset)
+          end  
+    end    
+
+    def update(conn, %{"id" => id,"reading" => reading, "time_of_day" => time_of_day}) do
+        # check if reading_params contain reading, time_of_day reading_taken_date
+        IO.puts inspect time_of_day <> " " <> reading
+        send_resp(conn, :no_content, "")
+    end
+ 
     defp convert_string_to_datetime(string_to_date) do
         # TODO : store users time zone offset from UTC in settings
         # this value will be used to with Timex shift offset

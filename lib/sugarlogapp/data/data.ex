@@ -78,10 +78,21 @@ defmodule Sugarlogapp.Data do
         |> Repo.get_by(id: id, user_id: user_id)
     end    
 
-    # update readings
     # delete readings    
     def delete_reading!(reading) do
         Repo.delete(reading)
     end
+
+    # update reading
+    def update_reading!(reading) do
+        Repo.update(reading)
+    end
+
+    def update_reading!(%Reading{} = reading, attrs) do
+        reading
+        |> Reading.update_changeset(attrs)
+        |> Repo.update()
+    end
+
 
 end    

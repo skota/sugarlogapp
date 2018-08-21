@@ -29,6 +29,9 @@ defmodule SugarlogappWeb.ReadingView do
         %{errors: translate_errors(changeset)} 
     end
 
-    
+    def render("update.json", %{message: message}) do
+        %{message: message}
+    end    
+
   end
   
