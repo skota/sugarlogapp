@@ -58,29 +58,39 @@ defmodule SugarlogappWeb.ReadingController do
 
     def update(conn, %{"id" => id,"reading" => reading_params}) do
         user = Guardian.Plug.current_resource(conn)
-        user_reading = Data.get_reading!(id, user.id)
-       
+
         # if map has reading_take_dt then try and transform it
         if Map.has_key?(reading_params, "reading_taken_dt") do
             reading_date = Map.get(reading_params, "reading_taken_dt")
-                           |> convert_string_to_datetime()
+                        |> convert_string_to_datetime()
 
-            reading_params = Map.replace!(reading_params, "reading_taken_dt",reading_date)
+            Map.replace!(reading_params, "reading_taken_dt",reading_date)            
         end    
 
+        case Data.get_reading!(id, user.id) do
+            {:ok, reading} ->
+                case Data.update_reading!(reading, reading_params) do
+                    {:ok, _updated_reading} ->      
+                        notify_result(conn, "Update successful",200)    
+                    {:error, changeset} ->            
+                        notify_error(conn, changeset, 401)
+                end
+            nil  ->    
+                notify_result(conn, "Error: Reading not found",401)    
+        end    
 
-        IO.puts inspect reading_params
-        
-        case Data.update_reading!(user_reading, reading_params) do
-            {:ok, reading} ->          
-                conn
-                |> put_status(200)      
-                |> render( "update.json", message: "Updated reading")  
-            {:error, changeset} ->            
-                conn
-                |> put_status(401)
-                |> render("error.json", changeset: changeset)
-        end  
+    end    
+
+    defp notify_error(conn, changeset,status) do
+        conn
+        |> put_status(status)
+        |> render("error.json", changeset: changeset)
+    end
+    
+    defp notify_result(conn, msg,status) do
+        conn
+        |> put_status(status)      
+        |> render( "update.json", message: msg)  
     end    
 
     defp convert_string_to_datetime(string_to_date) do
