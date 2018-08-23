@@ -47,7 +47,7 @@ defmodule SugarlogappWeb.ReadingController do
             nil ->
                 conn
                 |> put_status(403)      
-                |> render( "forbidden.json", message: "You cannot delete orders you do not own")  
+                |> render( "forbidden.json", message: "You cannot delete readings you do not own")  
             reading ->
                 with {:ok, %Reading{}} <- Data.delete_reading!(reading) do
                     send_resp(conn, :no_content, "")
