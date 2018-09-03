@@ -49,7 +49,9 @@ defmodule Sugarlogapp.Mixfile do
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 0.12"},
       {:hound, "~> 1.0"},
-      {:bamboo, github: "thoughtbot/bamboo"}
+      {:bamboo, github: "thoughtbot/bamboo"},
+      {:edeliver, ">= 1.6.0"},
+      {:distillery, "~> 2.0", warn_missing: false}
     ]
   end
 
