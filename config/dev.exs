@@ -55,11 +55,3 @@ config :sugarlogapp, Sugarlogapp.Repo,
   database: "sugarlogapp_dev",
   hostname: "localhost",
   pool_size: 10
-
-# Configure your database
-# config :sugarlogapp, Sugarlogapp.Repo,
-#       adapter: Ecto.Adapters.MySQL,
-#       database: "sugarlogapp",
-#       username: "root",
-#       password: "root",
-#       hostname: "localhost"

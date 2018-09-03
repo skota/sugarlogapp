@@ -59,6 +59,17 @@ config :logger, level: :info
 #     config :sugarlogapp, SugarlogappWeb.Endpoint, server: true
 #
 
+config :sugarlogapp, SugarlogappWeb.Endpoint,
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
+
+
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
+config :sugarlogapp, Sugarlogapp.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: System.get_env("DB_USER"),
+  password: System.get_env("DB_PASS"),
+  database: System.get_env("DB_NAME"),
+  hostname: "localhost",
+  pool_size: 10
