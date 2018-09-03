@@ -14,9 +14,9 @@ config :logger, level: :warn
 
 # Configure your database
 config :sugarlogapp, Sugarlogapp.Repo,
-      adapter: Ecto.Adapters.MySQL,
+      adapter: Ecto.Adapters.Postgres,
+      username: "postgres",
+      password: "postgres",
       database: "sugarlogapp_test",
-      username: "root",
-      password: "root",
       hostname: "localhost",
       pool: Ecto.Adapters.SQL.Sandbox
