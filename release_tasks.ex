@@ -1,7 +1,7 @@
 defmodule Sugarlogapp.ReleaseTasks do
     @start_apps [:crypto,:ssl,:postgrex,:ecto]
 
-    @repos Application.get_env(:my_app, :ecto_repos, [])
+    @repos Application.get_env(:sugarlogapp, :ecto_repos, [])
 
     # remove _argv
     def migrate() do
