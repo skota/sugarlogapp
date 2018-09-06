@@ -1,9 +1,35 @@
 defmodule Sugarlogapp.ReleaseTasks do
+    @app :sugarlogapp
     @start_apps [:crypto,:ssl,:postgrex,:ecto]
 
-    @repos Application.get_env(:sugarlogapp, :ecto_repos, [])
-
+    # @repos Application.get_env(@app, :ecto_repos, [])
+    @repo Sugarlogapp.Repo
     # remove _argv
+    def migrate_db() do
+        IO.puts "Loading sugarlog.."
+        # Load the code for mango, but
+        :ok = Application.load(@app)
+
+        IO.puts "Starting dependencies.."
+        # Start apps necessary for executing migrations
+        Enum.each(@start_apps, &Application.ensure_all_started/1)
+        # Start the Repo for mango
+        IO.puts "Starting repos.."
+        Mango.Repo.start_link(pool_size: 1)
+        # Run migrations
+        Ecto.Migrator.run(@repo, migrations_path(@app), :up, all:
+        true)
+        # Signal shutdown
+        IO.puts "Success!"
+        :init.stop()
+    end    
+
+    defp migrations_path(app) do
+        Path.join([:code.priv_dir(@app), "repo", "migrations"])
+    end
+
+
+
     def migrate() do
         start_services()    
         run_migrations()
