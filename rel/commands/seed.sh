@@ -1,3 +1,3 @@
 #!/bin/bash
 
-release_ctl eval --mfa "MyApp.ReleaseTasks.seed/1" -- "$@"
+release_ctl eval --mfa "Sugarlogapp.ReleaseTasks.seed/1" -- "$@"
