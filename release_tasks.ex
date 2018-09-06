@@ -3,8 +3,8 @@ defmodule Sugarlogapp.ReleaseTasks do
 
     @repos Application.get_env(:my_app, :ecto_repos, [])
 
-
-    def migrate(_argv) do
+    # remove _argv
+    def migrate() do
         start_services()    
         run_migrations()
         stop_services()
