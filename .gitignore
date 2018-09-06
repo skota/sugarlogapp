@@ -18,4 +18,4 @@ todo.txt
 /config/prod.secret.exs
 node_modules/
 assets/node_modules
-.edeliver/releases/
+.deliver/releases/
