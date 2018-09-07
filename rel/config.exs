@@ -52,6 +52,7 @@ release :sugarlogapp do
   ]
 
   set commands: [
+    migrate_db: "rel/commands/migrate.sh",
     migrate: "rel/commands/migrate.sh",
     seed: "rel/commands/seed.sh",
   ]
