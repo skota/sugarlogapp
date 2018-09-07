@@ -15,7 +15,7 @@ defmodule Sugarlogapp.ReleaseTasks do
         Enum.each(@start_apps, &Application.ensure_all_started/1)
         # Start the Repo for mango
         IO.puts "Starting repos.."
-        Mango.Repo.start_link(pool_size: 1)
+        Sugarlogapp.Repo.start_link(pool_size: 1)
         # Run migrations
         Ecto.Migrator.run(@repo, migrations_path(@app), :up, all:
         true)
