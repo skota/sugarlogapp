@@ -8,7 +8,7 @@ defmodule Sugarlogapp.ReleaseTasks do
     def migrate_db() do
         IO.puts "Loading sugarlog.."
         # Load the code for mango, but
-        :ok = Application.load(@app)
+        # :ok = Application.load(@app)
 
         IO.puts "Starting dependencies.."
         # Start apps necessary for executing migrations
