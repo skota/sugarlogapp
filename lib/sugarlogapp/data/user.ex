@@ -36,8 +36,8 @@ defmodule Sugarlogapp.Data.User do
     def changeset(%User{} = user, attrs) do        
         # password = Map.get(attrs , :password)        
         user
-        |> cast(attrs, [:first_name, :last_name,:email,:password, :password_hash,:activation_token, :activation_token_created_at ])        
-        |> validate_required([:first_name, :last_name,:email,:password])        
+        |> cast(attrs, [:first_name, :last_name, :email, :password, :password_hash, :activation_token, :activation_token_created_at ])        
+        |> validate_required([:first_name, :last_name, :email, :password])        
         |> validate_format(:email, ~r/@/, message: "Email is invalid")        
         |> unique_constraint(:email)    
         |> password_valid?   

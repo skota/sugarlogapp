@@ -19,12 +19,13 @@ defmodule SugarlogappWeb.ReadingController do
         # get current user id
         current_user = Guardian.Plug.current_resource(conn)
         
-        reading_taken_at = Map.get(reading_params,"reading_taken_dt")
-                           |>  convert_string_to_datetime()    
+        reading_taken_at = reading_params 
+                            |> Map.get("reading_taken_dt")
+                            |>  convert_string_to_datetime()    
 
         reading_attributes = %{"user_id" => current_user.id,
-                         "reading" => Map.get(reading_params,"reading"), 
-                         "time_of_day" => Map.get(reading_params,"time_of_day"), 
+                         "reading" => Map.get(reading_params, "reading"), 
+                         "time_of_day" => Map.get(reading_params, "time_of_day"), 
                          "reading_taken_dt" => reading_taken_at} 
 
         # try and create reading
@@ -56,38 +57,38 @@ defmodule SugarlogappWeb.ReadingController do
 
     end
 
-    def update(conn, %{"id" => id,"reading" => reading_params}) do
+    def update(conn, %{"id" => id, "reading" => reading_params}) do
         user = Guardian.Plug.current_resource(conn)
 
         # if map has reading_take_dt then try and transform it
         if Map.has_key?(reading_params, "reading_taken_dt") do
-            reading_date = Map.get(reading_params, "reading_taken_dt")
+            reading_date = reading_params |> Map.get("reading_taken_dt")
                         |> convert_string_to_datetime()
 
-            Map.replace!(reading_params, "reading_taken_dt",reading_date)            
+            Map.replace!(reading_params, "reading_taken_dt", reading_date)            
         end    
 
         case Data.get_reading!(id, user.id) do
             {:ok, reading} ->
                 case Data.update_reading!(reading, reading_params) do
                     {:ok, _updated_reading} ->      
-                        notify_result(conn, "Update successful",200)    
+                        notify_result(conn, "Update successful", 200)    
                     {:error, changeset} ->            
                         notify_error(conn, changeset, 401)
                 end
             nil  ->    
-                notify_result(conn, "Error: Reading not found",401)    
+                notify_result(conn, "Error: Reading not found", 401)    
         end    
 
     end    
 
-    defp notify_error(conn, changeset,status) do
+    defp notify_error(conn, changeset, status) do
         conn
         |> put_status(status)
         |> render("error.json", changeset: changeset)
     end
     
-    defp notify_result(conn, msg,status) do
+    defp notify_result(conn, msg, status) do
         conn
         |> put_status(status)      
         |> render( "update.json", message: msg)  
@@ -101,21 +102,21 @@ defmodule SugarlogappWeb.ReadingController do
         split_date_time = string_to_date |> String.split( " ")
 
         # split date into yyyy, mm, dd
-        date_parts = Enum.at(split_date_time,0) |> String.split( "-")
+        date_parts = split_date_time |> Enum.at(0) |> String.split( "-")
 
         # split time into hh, mm, ss
-        time_parts = Enum.at(split_date_time,1) |> String.split( ":")
+        time_parts = split_date_time |> Enum.at(1) |> String.split( ":")
 
-        yr = Enum.at(date_parts,0) |> String.trim |> String.to_integer
-        mm = Enum.at(date_parts,1) |> String.trim |> String.to_integer
-        dd = Enum.at(date_parts,2) |> String.trim |> String.to_integer
+        yr = date_parts |> Enum.at(0) |> String.trim |> String.to_integer
+        mm = date_parts |> Enum.at(1) |> String.trim |> String.to_integer
+        dd = date_parts |> Enum.at(2) |> String.trim |> String.to_integer
 
         
-        hr = Enum.at(time_parts,0) |> String.trim |> String.to_integer 
+        hr =  time_parts |> Enum.at(0) |> String.trim |> String.to_integer 
         # |> Timex.Time.to_24hour_clock(ampm)
-        min = Enum.at(time_parts,1) |> String.trim |> String.to_integer
+        min = time_parts |> Enum.at(1) |> String.trim |> String.to_integer
         sec = 0
-        Timex.to_datetime({{yr,mm,dd}, {hr,min,sec}}, "Etc/UTC") 
+        Timex.to_datetime({{yr, mm, dd}, {hr, min, sec}}, "Etc/UTC") 
         #    |> Timex.shift(hours: offset_hrs)        
     end    
 end    

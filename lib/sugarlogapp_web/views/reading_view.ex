@@ -15,7 +15,7 @@ defmodule SugarlogappWeb.ReadingView do
         }        
     end
 
-    def render("success.json",%{readingid: id, message: message}) do
+    def render("success.json", %{readingid: id, message: message}) do
         %{  id:         id, 
             message:    message 
         }

@@ -28,7 +28,8 @@ defmodule SugarlogappWeb.RegistrationController do
         #token created at datetime
         token_created_at = Timex.now()
 
-        params = Map.put(user_params, "activation_token",token)
+        params = user_params 
+                |> Map.put("activation_token",token)
                 |> Map.put("activation_token_created_at",token_created_at)    
 
         # TODO move token generation and mail sending to a background job...

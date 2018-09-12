@@ -28,8 +28,6 @@ defmodule Sugarlogapp.ReleaseTasks do
         Path.join([:code.priv_dir(@app), "repo", "migrations"])
     end
 
-
-
     def migrate() do
         start_services()    
         run_migrations()
