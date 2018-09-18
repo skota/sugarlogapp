@@ -18,6 +18,7 @@ defmodule SugarlogappWeb.Router do
   end
 
   pipeline :api do
+    plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
     # plug Guardian.Plug.VerifyHeader, realm: "Bearer"
   end
@@ -32,7 +33,10 @@ defmodule SugarlogappWeb.Router do
     pipe_through :api
 
     # registration and activate
+    options "/register", RegistrationController, :options
     post "/register", RegistrationController, :create  
+    
+
     put "/activate/:token", RegistrationController, :activate  
 
     #login

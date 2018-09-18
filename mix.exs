@@ -51,7 +51,8 @@ defmodule Sugarlogapp.Mixfile do
       {:hound, "~> 1.0"},
       {:bamboo, github: "thoughtbot/bamboo"},
       {:edeliver, ">= 1.6.0"},
-      {:distillery, "~> 2.0", warn_missing: false}
+      {:distillery, "~> 2.0", warn_missing: false},
+      {:cors_plug, "~> 1.5"}	
     ]
   end
 
