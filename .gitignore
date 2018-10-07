@@ -19,3 +19,6 @@ todo.txt
 node_modules/
 assets/node_modules
 .deliver/releases/
+
+
+/priv/static/
