@@ -5,9 +5,14 @@
 Sugarlogapp is a simple app to record and track blood sugar levels. The app has web and mobile components
 
   * Rest API powered by Phoenix
-  * Web frontned based on Node/express/angular
   * Mobile app will be built using the awesome flutter sdk.
-  
+
+
+##todo
+  * describe overall flow 
+  * describe tables
+  * describe endpoints
+
 ## How do i use this repo?
 To start your Phoenix server: Clone or fork this repo. Then 
 

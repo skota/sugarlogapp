@@ -22,8 +22,15 @@ defmodule SugarlogappWeb.Router do
     plug :accepts, ["json"]
     # plug Guardian.Plug.VerifyHeader, realm: "Bearer"
   end
+  
+  # browser routes
+  scope "/", PanelbulmaWeb do
+    pipe_through :browser # Use the default browser stack
 
-  # we dont have any browser routes..only api
+    get "/", PageController, :index
+  end
+
+  # api routes
   scope "/", SugarlogappWeb do
     pipe_through :browser # Use the default browser stack
   end
