@@ -3,6 +3,7 @@
   "license": "MIT",
   "scripts": {
     "deploy": "webpack --mode production",
+    "start": "yarn run watch",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {

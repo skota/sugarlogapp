@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+  <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
         <div class="navbar-brand">
 
           <a class="navbar-item is--brand">
-            <img class="navbar-brand-logo" src="/bulma-admin-dashboard-template/logo.png" alt="Bulma Admin Template logo">
+            <img class="navbar-brand-logo" src="<%= static_path(@conn, "/images/logo.png") %>">
           </a>
           <a class="navbar-item is-tab is-hidden-mobile is-active"><span class="icon is-medium"><i class="fa fa-home"></i></span>Home</a>
           <a class="navbar-item is-tab is-hidden-mobile">Features</a>
@@ -37,7 +37,6 @@
           </button>
 
         </div>
-
 
         <div class="navbar-menu navbar-end" id="navMenu">
           <a class="navbar-item is-tab is-hidden-tablet is-active">Home</a>
@@ -93,28 +92,11 @@
             Administration
           </p>
           <ul class="menu-list">
-            <li><a href="/bulma-admin-dashboard-template/forms.html"><span class="icon is-small"><i class="fa fa-pencil-square-o"></i></span> Forms</a></li>
-            <li><a href="/bulma-admin-dashboard-template/ui-elements.html"><span class="icon is-small"><i class="fa fa-desktop"></i></span> UI Elements</a></li>
-            <li><a href="/bulma-admin-dashboard-template/tables.html"><span class="icon is-small"><i class="fa fa-table"></i></span> Tables</a></li>
-            <li><a href="/bulma-admin-dashboard-template/presentations.html"><span class="icon is-small"><i class="fa fa-bar-chart"></i></span> Presentations</a></li>
-
-            <li>
-              <a class=""><i class="fa fa-cog"></i> Settings</a>
-              <ul>
-                <li><a>Members</a></li>
-                <li><a>Plugins</a></li>
-                <li><a>Add a member</a></li>
-              </ul>
-            </li>
-          </ul>
-          <p class="menu-label">
-            Live On
-          </p>
-          <ul class="menu-list">
-            <li><a><span class="icon is-small"><i class="fa fa-bug"></i></span> Additional Pages</a></li>
-            <li><a><span class="icon is-small"><i class="fa fa-windows"></i></span> Extras</a></li>
-            <li><a><span class="icon is-small"><i class="fa fa-laptop"></i></span> Landing Page</a></li>
-          </ul>
+            <li><a href="#"><span class="icon is-small"><i class="fa fa-pencil-square-o"></i></span> Readings</a></li>
+            <li><a href="#"><span class="icon is-small"><i class="fa fa-desktop"></i></span> Settings</a></li>
+            <li><a href="#"><span class="icon is-small"><i class="fa fa-table"></i></span> profile</a></li>
+            <li><a href="#"><span class="icon is-small"><i class="fa fa-bar-chart"></i></span> Help</a></li>
+           </ul> 
         </nav>
       </aside>
 
@@ -256,6 +238,6 @@
       </main>
     </div>
   </div>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>   
 </body>
-
 </html>

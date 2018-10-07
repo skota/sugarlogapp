@@ -24,16 +24,16 @@ defmodule SugarlogappWeb.Router do
   end
   
   # browser routes
-  scope "/", PanelbulmaWeb do
+  scope "/", SugarlogappWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
   end
 
   # api routes
-  scope "/", SugarlogappWeb do
-    pipe_through :browser # Use the default browser stack
-  end
+  # scope "/", SugarlogappWeb do
+  #   pipe_through :browser # Use the default browser stack
+  # end
 
   # Other scopes may use custom stacks.
   scope "/api", SugarlogappWeb do

@@ -1,0 +1,30 @@
+<h2>Hello</h2>
+
+
+
+
+<section>
+    <p>So, this single declaration gives us everything we need — incredible, right? We have our multiple column layout with equal sized columns, and the columns are all the same height. This is because the default values given to flex items (the children of the flex container) are set up to solve common problems such as this. More on those later.
+        Note: You can also set a display value of inline-flex if you wish to lay out inline items as flexible boxes.
+
+        An aside on the flex modelSection
+        When elements are laid out as flexible boxes, they are laid out along two axes:
+
+        flex_terms.png
+
+        The main axis is the axis running in the direction the flex items are being laid out in (e.g. as rows across the page, or columns down the page.) The start and end of this axis are called the main start and main end.
+        The cross axis is the axis running perpendicular to the direction the flex items are being laid out in. The start and end of this axis are called the cross start and cross end.
+        The parent element that has display: flex set on it (the <section> in our example) is called the flex container.
+        The items being laid out as flexible boxes inside the flex container are called flex items (the <article> elements in our example).
+        Bear this terminology in mind as you go through subsequent sections. You can always refer back to it if you get confused about any of the terms being used.
+
+        Columns or rows?Section
+        Flexbox provides a property called flex-direction that specifies what direction the main axis runs in (what direction the flexbox children are laid out in) — by default this is set to row, which causes them to be laid out in a row in the direction your browser's default language works in (left to right, in the case of an English browser).
+
+        Try adding the following declaration to your section rule:
+
+        flex-direction: column;
+        You'll see that this puts the items back in a column layout, much like they were before we added any CSS. Before you move on, delete this declaration from your example.
+
+    </p>
+</section >
