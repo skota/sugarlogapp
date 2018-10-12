@@ -1,0 +1,74 @@
+<div class="column is-5 is-offset-4">
+        <div class="columns is-centered">
+            <div class="column is-narrow">
+                <h3 class="title has-text-grey is-centered">Register</h3>
+                <p class="subtitle has-text-grey is-centered">Create your sugarlogapp account.</p>
+            </div>    
+        </div>    
+
+    
+    <div class="box">
+        <div class="columns is-centered">
+            <div class="column is-narrow">
+                <figure class="avatar">
+                    <img src="https://placehold.it/100x100">
+                </figure>
+            </div>    
+        </div>    
+           
+
+        <%= form_for @changeset, registration_web_path(@conn, :create), [as: :register], fn f -> %>
+            <div class="field">        
+                <%= label f, :first_name, class: "label" %>
+                <div class="control">
+                    <%= text_input f, :first_name, class: "input" %>
+                    <%= error_tag f, :first_name %>
+                </div>    
+            </div>    
+
+            <div class="field">        
+                <%= label f, :last_name, class: "label" %>
+                <div class="control">
+                    <%= text_input f, :last_name, class: "input" %>
+                    <%= error_tag f, :last_name %>
+                </div>    
+            </div>    
+
+            <div class="field">        
+                <%= label f, :email, class: "label" %>
+                <div class="control">
+                    <%= text_input f, :email, class: "input", placeholder: "e.g. jsmith@gmail.com" %>
+                    <%= error_tag f, :email %>
+                </div>    
+            </div>    
+
+            <div class="field">
+                <%= label f, :password, class: "label" %>
+                <div class="control">
+                    <%= password_input f, :password, class: "input", placeholder: "*******" %>
+                    <p class="help is-danger">
+                         <%= error_tag f, :password %>
+                    </p>     
+                </div>    
+            </div>
+
+            <div class="field">     
+                <div class="control">
+                    <%= submit "Register", class: "button is-block is-info is-large is-fullwidth" %>
+                </div>
+            </div>    
+            
+        <% end %>
+
+        <div class="columns is-mobile is-centered">
+            <div class="column is-half">
+                <a href="/login">Already have an account?</a>
+            </div>
+            <div class="column is-half">
+                <a href="#">Forgot Password</a>
+            </div>
+
+        </div>
+
+    
+</div>

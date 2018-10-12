@@ -1,8 +1,8 @@
 defmodule Sugarlogapp.Auth.Pipeline do
     use Guardian.Plug.Pipeline,
       otp_app: :sugarlogapp,
-      error_handler: Sugarlogapp.Auth.ErrorHandler,
       module: Sugarlogapp.Guardian
+      # error_handler: Sugarlogapp.Auth.ErrorHandler,
     
     # If there is a session token, validate it
     plug Guardian.Plug.VerifySession, claims: %{"typ" => "access"}

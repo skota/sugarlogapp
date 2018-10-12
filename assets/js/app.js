@@ -19,3 +19,4 @@ import css from "../css/app.css"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+// import flatpickr from "flatpickr";

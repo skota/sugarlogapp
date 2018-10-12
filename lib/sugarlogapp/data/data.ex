@@ -19,6 +19,13 @@ defmodule Sugarlogapp.Data do
         |> Repo.insert()
     end
     
+    #-------------------setting --------------------------------------
+    def get_setting!(user_id) do
+        Setting        
+        |> Repo.get_by(user_id: user_id,)
+    end
+
+
     # def activate_user(attrs \\ %{}) do
     #     %User{}
     #     |> User.activate_changeset(attrs)
@@ -37,9 +44,7 @@ defmodule Sugarlogapp.Data do
     # TODO: 4. find user by reset token
     # find user by email and confirm that password matches
     def find_and_confirm_password(%{"email" => email, "password" => pass}) do        
-
         user = get_user_by_email(email)
-        IO.puts inspect user
         if user do
             cond do
                 user && Comeonin.Bcrypt.checkpw(pass, user.password_hash) ->
@@ -65,15 +70,18 @@ defmodule Sugarlogapp.Data do
         |> Reading.changeset(attrs)
         |> Repo.insert()
     end
-
+    
     def get_readings(user_id) do
-        Reading 
-        |> Ecto.Query.where(user_id: ^user_id) 
-        |> Repo.all
+        query = from Reading,
+            where: [user_id: ^user_id],
+            order_by: [desc: :reading_taken_dt],
+            select: [:id, :user_id, :reading, :time_of_day, :reading_taken_dt]
+
+        Repo.all(query)
     end
 
     # get reading
-    def get_reading!(id, user_id) do
+    def get_reading(id, user_id) do
         Reading        
         |> Repo.get_by(id: id, user_id: user_id)
     end    
@@ -94,5 +102,6 @@ defmodule Sugarlogapp.Data do
         |> Repo.update()
     end
 
+    # --- registration ----------------------------
 
 end    

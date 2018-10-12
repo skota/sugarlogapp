@@ -1,0 +1,135 @@
+defmodule SugarlogappWeb.ReadingWebController do    
+    use SugarlogappWeb, :controller 
+    
+    alias Sugarlogapp.Auth
+    alias Sugarlogapp.Data
+    alias Sugarlogapp.Data.Reading
+    alias Sugarlogapp.Guardian
+ 
+    plug :put_layout, "dashboard.html" 
+    
+    def index(conn, _params) do
+        # get current user id        
+        current_user = Guardian.Plug.current_resource(conn)
+        IO.puts inspect current_user.first_name
+        readings = Data.get_readings(current_user.id)
+        render(conn, "index.html", readings: readings)
+    end 
+    
+    def create(conn, %{"reading" => reading_params}) do
+        current_user = Guardian.Plug.current_resource(conn)
+        IO.puts inspect current_user
+        
+        reading_date = reading_params |> Map.get("reading_date")
+        reading_time = reading_params |> Map.get("reading_time")
+        reading_datetime= build_datetime(reading_date,reading_time )
+
+        reading_attributes = %{"user_id" => current_user.id,
+                         "reading" => Map.get(reading_params, "reading"), 
+                         "time_of_day" => Map.get(reading_params, "time_of_day"), 
+                         "reading_taken_dt" => reading_datetime} 
+
+        # try and create reading
+        case Data.create_reading(reading_attributes) do
+            {:ok, reading} ->                      
+                conn
+                |> put_flash(:info, "Reading created successfully")
+                |> redirect(to: "/readings")
+
+            {:error, changeset} ->     
+                render conn, "edit.html",reading: nil, reading_time_of_day: "", changeset: changeset, mode: "Edit"                          end  
+    end   
+    
+    def edit(conn, %{"id" => id}) do 
+        user = Guardian.Plug.current_resource(conn)
+        reading = Data.get_reading(id, user.id)
+
+        changeset = Reading.blank_changeset(reading, %{})
+
+        render(conn, "edit.html",   reading: reading, 
+                                    reading_time_of_day: reading.time_of_day,
+                                    changeset: changeset, 
+                                    mode: "Edit")
+    end  
+
+    def new(conn, _) do
+        changeset = Data.build_reading()       
+        render(conn, "new.html",
+                    reading: nil,
+                    reading_time_of_day: "",
+                    changeset: changeset, 
+                    mode: "Create")
+    end   
+    
+    def delete(conn, %{"id" => id}) do
+        user = Guardian.Plug.current_resource(conn)
+
+        case Data.get_reading!(id, user.id) do
+            nil ->
+                conn
+                |> put_status(403)      
+                |> render( "forbidden.json", message: "You cannot delete readings you do not own")  
+            reading ->
+                with {:ok, %Reading{}} <- Data.delete_reading!(reading) do
+                    send_resp(conn, :no_content, "")
+                end
+        end    
+
+    end
+
+    def update(conn, %{"id" => id, "reading" => reading_params}) do
+        user = Guardian.Plug.current_resource(conn)
+        
+        reading_date = reading_params |> Map.get("reading_date")
+        reading_time = reading_params |> Map.get("reading_time")
+        reading_datetime= build_datetime(reading_date,reading_time )
+
+        reading_attributes = %{"user_id" => user.id,
+                    "reading" => Map.get(reading_params, "reading"), 
+                    "time_of_day" => Map.get(reading_params, "time_of_day"), 
+                    "reading_taken_dt" => reading_datetime} 
+        
+        case Data.get_reading(id, user.id) do
+            # { :ok, reading } ->
+            reading ->    
+                case Data.update_reading!(reading, reading_attributes) do
+                    {:ok, _reading} ->      
+                        conn
+                        |> put_flash(:info, "Reading updated successfully")
+                        |> redirect(to: "/readings")
+                    {:error, changeset} ->            
+                        render conn, "edit.html",reading: reading, changeset: changeset, mode: "Edit"                
+                end
+            nil  ->    
+                conn
+                |> put_flash(:info, "Reading not found")
+                |> redirect(to: "/readings")
+        end    
+
+    end    
+
+    defp build_datetime(reading_date, reading_time) do
+        # TODO : store users time zone offset from UTC in settings
+        # this value will be used to with Timex shift offset
+        # TODO:  show 24hr time in human readable form
+
+        # split string into parts - date time am/pm
+        # split_date_time = string_to_date |> String.split( " ")
+
+        # split date into yyyy, mm, dd
+        date_parts = reading_date |> String.split( ".")
+        # split time into hh, mm
+        time_parts = reading_time |> String.split( ":")
+
+        mm = date_parts |> Enum.at(0) |> String.trim |> String.to_integer
+        dd = date_parts |> Enum.at(1) |> String.trim |> String.to_integer
+        yr = date_parts |> Enum.at(2) |> String.trim |> String.to_integer
+
+        hr =  time_parts |> Enum.at(0) |> String.trim |> String.to_integer 
+        # |> Timex.Time.to_24hour_clock(ampm)
+        min = time_parts |> Enum.at(1) |> String.trim |> String.to_integer
+        sec = 0
+        Timex.to_datetime({{yr, mm, dd}, {hr, min, sec}}, "America/New_York") 
+        #    |> Timex.shift(hours: offset_hrs)        
+    end
+end    

@@ -3,21 +3,21 @@ defmodule SugarlogappWeb.RegistrationController do
     alias Sugarlogapp.Data
     alias Sugarlogapp.Data.User
 
-    # defp build_email(conn,token,email) do        
-    #   base_url = conn.host
-    #   port = conn.port
+    defp build_email(conn,token,email) do        
+      base_url = conn.host
+      port = conn.port
 
-    #   #only add port if it is not 80 or 443        
-    #   activation_url = "http://"<>base_url <> ":"<>Integer.to_string(port)<> "/activate/" <> token 
+      #only add port if it is not 80 or 443        
+      activation_url = "http://"<>base_url <> ":"<>Integer.to_string(port)<> "/activate/" <> token 
       
-    #   # user_details = %{ rest_url: reset_url, user_email: email}
-    #   Email.welcome_email(activation_url, email ) |> Mailer.deliver_later
+      # user_details = %{ rest_url: reset_url, user_email: email}
+      Email.welcome_email(activation_url, email ) |> Mailer.deliver_later
       
-    #   conn
-    #   |> put_status(201)
-    #   |> render("activation-sent.json", message: "Success! Your account has been created, You must activate your account before you can log in. Please check your email for activation instructions.")
+      conn
+      |> put_status(201)
+      |> render("activation-sent.json", message: "Success! Your account has been created, You must activate your account before you can log in. Please check your email for activation instructions.")
 
-    # end
+    end
   
     def create(conn, %{"register" => user_params}) do
       token = 40
@@ -40,6 +40,7 @@ defmodule SugarlogappWeb.RegistrationController do
                 # ok..next user must verify email
                 # conn
                 # |> build_email(token,user.email)
+                
                 conn
                 |> put_status(201)
                 |> render("activation-sent.json", 
