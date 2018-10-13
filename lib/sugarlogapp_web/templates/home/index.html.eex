@@ -1,0 +1,60 @@
+<section class="section has-background-light">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <article class="media notification is-info">
+                    <figure class="media-left">
+                        <span class="icon is-large">
+                            <i class="fa-3x fa fa-tint"></i>
+                        </span>												
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <h1 class="title is-size-4">Min</h1>
+                            <p class="large-text">
+                                156
+                            </p>	
+                        </div>
+                    </div>
+                </article>	
+            </div>
+            <div class="column">
+                <article class="media notification is-info">
+                    <figure class="media-left">
+                        <span class="icon is-medium">
+                            <i class="fa-3x fa fa-tint"></i>
+                        </span>												
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <h1 class="title is-size-4">Average</h1>	
+                            <p class="large-text">
+                                200
+                            </p>	
+                        </div>	
+                    </div>				
+                </article>									
+            </div>
+            <div class="column">
+                <article class="media notification is-info">
+                    <figure class="media-left">
+                        <span class="icon is-medium">
+                            <i class="fa-3x fa fa-tint"></i>
+                        </span>												
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <h1 class="title is-size-4">Max</h1>	
+                                <p class="large-text">
+                                    384
+                                </p>
+                        </div>	
+                    </div>			
+                </article>									
+            </div>
+
+        </div>
+         <h2>Your A1C is 7.34 </h2>       
+         <p>You are doing great keep it up</p>
+    </div>
+</section>

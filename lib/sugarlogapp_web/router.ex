@@ -43,7 +43,7 @@ defmodule SugarlogappWeb.Router do
   scope "/", SugarlogappWeb do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", HomeController, :index
 
     get "/login", LoginWebController, :new  
     post "/login", LoginWebController, :create  
@@ -54,6 +54,10 @@ defmodule SugarlogappWeb.Router do
     
     get "/register", RegistrationWebController, :new  
     post "/register", RegistrationWebController, :create  
+
+    
+
+
   end
 
   scope "/", SugarlogappWeb do

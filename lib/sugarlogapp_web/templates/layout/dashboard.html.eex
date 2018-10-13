@@ -11,9 +11,11 @@
   <title>Sugarlogapp</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  -->   
   <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 </head>
@@ -89,7 +91,7 @@
             General
           </p>
           <ul class="menu-list">
-            <li><a class="is-active" href="#"><span class="icon is-small"><i class="fa fa-tachometer"></i></span> Dashboard</a></li>
+            <li><a class="is-active" href="/"><span class="icon is-small"><i class="fa fa-tachometer"></i></span> Dashboard</a></li>
           </ul>
           <p class="menu-label">
             Administration
