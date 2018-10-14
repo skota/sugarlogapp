@@ -1,0 +1,31 @@
+<div class="column is-8">
+    <div class="box">
+        <%= form_for @changeset, settings_web_path(@conn, :update, @setting.id), fn f -> %>
+            <div class="field">        
+                <%= label f, :notifications, class: "label" %>
+                <div class="control">
+                    <%= select f, :notifications, ["Select a value",
+                            "Yes",
+                            "No"], 
+                            [value: @notification_setting, class: "input"]%>
+                </div>    
+            </div>    
+
+            <div class="field">        
+                <%= label f, :reading_unit, class: "label" %>
+                <div class="control">
+                    <%= select f, :reading_unit, ["Select a value",
+                            "mmol/L",
+                            "mg/dL"], 
+                            [value: @setting.reading_unit, class: "input"]%>
+                    <%= error_tag f, :reading_unit %>
+                </div>    
+            </div>    
+
+            <div class="field">     
+                <div class="control">
+                    <%= submit "Save", class: "button is-block is-info is-large is-fullwidth" %>
+                </div>
+            </div>    
+        <% end %>
+</div>

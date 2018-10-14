@@ -34,7 +34,7 @@ defmodule SugarlogappWeb.Router do
   end
 
   pipeline :api do
-    plug CORSPlug, origin: "*"
+    # plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
     # plug Guardian.Plug.VerifyHeader, realm: "Bearer"
   end
@@ -42,8 +42,6 @@ defmodule SugarlogappWeb.Router do
   # browser routes
   scope "/", SugarlogappWeb do
     pipe_through :browser # Use the default browser stack
-
-    get "/", HomeController, :index
 
     get "/login", LoginWebController, :new  
     post "/login", LoginWebController, :create  
@@ -54,17 +52,19 @@ defmodule SugarlogappWeb.Router do
     
     get "/register", RegistrationWebController, :new  
     post "/register", RegistrationWebController, :create  
-
-    
-
-
   end
 
   scope "/", SugarlogappWeb do
     pipe_through [:browser_authenticate, :browser, :browser_session]
-
+    
+    get "/", HomeController, :index  
+    
     # endpoints for readings
     resources "/readings", ReadingWebController
+    
+    get "/settings", SettingsWebController, :index
+    put "/setting/:id", SettingsWebController, :update
+
   end  
 
 

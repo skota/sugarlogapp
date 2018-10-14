@@ -5,6 +5,7 @@ defmodule Sugarlogapp.Data do
     # alias the schema-----------------------
     alias Sugarlogapp.Data.User
     alias Sugarlogapp.Data.Reading
+    alias Sugarlogapp.Data.Setting
     alias Sugarlogapp.Repo
     
     # --- users ------------------------------
@@ -20,9 +21,15 @@ defmodule Sugarlogapp.Data do
     end
     
     #-------------------setting --------------------------------------
-    def get_setting!(user_id) do
+    def get_setting(user_id) do
         Setting        
         |> Repo.get_by(user_id: user_id,)
+    end
+
+    def update_setting(%Setting{} = setting, attrs) do
+        setting
+        |> Setting.changeset(attrs)
+        |> Repo.update()
     end
 
 
@@ -101,7 +108,5 @@ defmodule Sugarlogapp.Data do
         |> Reading.update_changeset(attrs)
         |> Repo.update()
     end
-
-    # --- registration ----------------------------
 
 end    

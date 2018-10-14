@@ -98,7 +98,7 @@
           </p>
           <ul class="menu-list">
             <li><a href="/readings"><span class="icon is-small"><i class="fa fa-pencil-square-o"></i></span> Readings</a></li>
-            <li><a href="#"><span class="icon is-small"><i class="fa fa-desktop"></i></span> Settings</a></li>
+            <li><a href="/settings"><span class="icon is-small"><i class="fa fa-desktop"></i></span> Settings</a></li>
             <li><a href="#"><span class="icon is-small"><i class="fa fa-table"></i></span> profile</a></li>
             <li><a href="#"><span class="icon is-small"><i class="fa fa-bar-chart"></i></span> Help</a></li>
            </ul> 
