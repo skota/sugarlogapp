@@ -64,7 +64,7 @@ defmodule SugarlogappWeb.Router do
     
     get "/settings", SettingsWebController, :index
     put "/setting/:id", SettingsWebController, :update
-
+    get "/*path", NorouteController, :index
   end  
 
 
@@ -102,6 +102,4 @@ defmodule SugarlogappWeb.Router do
     # reading_path  POST    /api/readings           SugarlogappWeb.ReadingController :create
   end  
   
-  # catch all route
-  # get "/*path", NorouteController, :index
 end

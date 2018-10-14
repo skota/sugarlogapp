@@ -1,6 +1,10 @@
 <div class="column is-5 is-offset-4">
-    <h3 class="title has-text-grey">Login</h3>
-    <p class="subtitle has-text-grey">Login to record blood sugar levels.</p>
+    <div class="columns is-centered">
+        <div class="column is-narrow">
+            <h3 class="title has-text-grey">Login</h3>
+            <p class="subtitle has-text-grey">Login to record blood sugar levels.</p>
+        </div>
+    </div>        
 
     <div class="box">
         <div class="columns is-centered">
@@ -51,7 +55,7 @@
             <div class="column is-half">
                 <a href="/register">Need an account?</a>
             </div>
-            <div class="column is-half">
+            <div class="column is-half has-text-right">
                 <a href="#">Forgot Password</a>
             </div>
 

@@ -15,7 +15,16 @@
                 </figure>
             </div>    
         </div>    
-           
+        <%
+            info = get_flash(@conn, :info)
+            error = get_flash(@conn, :error)
+        %>
+        <%= if error do %>
+            <div class="notification is-danger">
+                <button class="delete"></button>
+                <%= error %>
+            </div>
+        <% end %>    
 
         <%= form_for @changeset, registration_web_path(@conn, :create), [as: :register], fn f -> %>
             <div class="field">        
@@ -60,11 +69,11 @@
             
         <% end %>
 
-        <div class="columns is-mobile is-centered">
+        <div class="columns is-mobile ">
             <div class="column is-half">
                 <a href="/login">Already have an account?</a>
             </div>
-            <div class="column is-half">
+            <div class="column is-half has-text-right">
                 <a href="#">Forgot Password</a>
             </div>
 
