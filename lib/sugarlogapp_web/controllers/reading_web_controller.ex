@@ -102,14 +102,20 @@ defmodule SugarlogappWeb.ReadingWebController do
     def delete(conn, %{"id" => id}) do
         user = Guardian.Plug.current_resource(conn)
 
-        case Data.get_reading!(id, user.id) do
+        conn
+        |> put_flash(:info, "Reading updated successfully")
+        |> redirect(to: "/readings")
+
+        case Data.get_reading(id, user.id) do
             nil ->
                 conn
-                |> put_status(403)      
-                |> render( "forbidden.json", message: "You cannot delete readings you do not own")  
+                |> put_flash(:error, "Reading not found")
+                |> redirect(to: "/readings")
             reading ->
                 with {:ok, %Reading{}} <- Data.delete_reading!(reading) do
-                    send_resp(conn, :no_content, "")
+                    conn
+                    |> put_flash(:info, "Reading deleted")
+                    |> redirect(to: "/readings")
                 end
         end    
 

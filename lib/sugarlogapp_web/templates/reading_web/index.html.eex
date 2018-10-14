@@ -33,7 +33,7 @@
                                 to: reading_web_path(@conn, :edit, reading), 
                                 class: "button is-info" %></span>                            
                                 <span><%= link gettext("Delete  "), 
-                                to: reading_web_path(@conn, :edit, reading), 
+                                to: reading_web_path(@conn, :delete, reading), 
                                 method: :delete, data: [confirm: "Are you sure. This operation cannot be undone?"],
                                 class: "button is-danger" %></span>                            
 
