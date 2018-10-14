@@ -19,13 +19,16 @@ defmodule SugarlogappWeb.LoginWebController do
         case Data.find_and_confirm_password(login_params) do
             {:ok, user} ->
                 #get and store user settings in conn
-                # user_settings = Data.get_setting!(user.id)
+                user_settings = Data.get_setting(user.id)
                 username = user.first_name <> " "<> user.last_name
 
                 conn
-                |> put_session(:setting, %{ current_user: user})
+                |> put_session(:setting, %{ current_user: user,
+                                            user_settings: user_settings 
+                    })
+                
                 |> Guardian.Plug.sign_in(user)
-                |> redirect(to: "/readings")
+                |> redirect(to: "/")
             :error ->
                 conn
                 |> put_flash(:error, "Invalid username/password")

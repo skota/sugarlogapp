@@ -2,6 +2,9 @@ defmodule SugarlogappWeb.ReadingWebView do
     use SugarlogappWeb, :view
     import Timex
 
+    def reading_with_unit(reading,reading_unit) do
+        Integer.to_string(reading.reading)<> " "<> reading_unit
+    end    
 
     def show_order_date(reading) do
         if !reading do

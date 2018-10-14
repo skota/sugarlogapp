@@ -11,6 +11,17 @@
             </div>    
         </div>    
 
+        <%
+            info = get_flash(@conn, :info)
+            error = get_flash(@conn, :error)
+        %>
+        <%= if error do %>
+            <div class="notification is-danger">
+                <button class="delete"></button>
+                <%= error %>
+            </div>
+        <% end %>    
+
         <%= form_for @conn, login_web_path(@conn, :create), [as: :login], fn f -> %>
             <div class="field">        
                 <%= label f, :email, class: "label" %>

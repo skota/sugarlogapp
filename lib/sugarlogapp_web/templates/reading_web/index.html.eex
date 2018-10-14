@@ -25,7 +25,7 @@
                 <tbody>
                     <%= for reading <- @readings do %> 
                         <tr>
-                            <td><%= reading.reading %></td>
+                            <td><%= reading_with_unit(reading,@reading_unit) %></td>
                             <td><%= reading.time_of_day %></td>
                             <td><%= SugarlogappWeb.ReadingWebView.show_order_date_time(reading) %></td>                     
                             <td>

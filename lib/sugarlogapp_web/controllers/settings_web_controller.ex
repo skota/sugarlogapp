@@ -37,7 +37,8 @@ defmodule SugarlogappWeb.SettingsWebController do
         push_notifications = true  
       end    
       updated_settings = %{"reading_unit" => setting_params["reading_unit"],
-                          "notifications" => push_notifications}
+                          "notifications" => push_notifications,
+                          "notes" => setting_params["notes"]}
       
       # params - convert true false to boolean
       case Data.update_setting(user_setting, updated_settings) do

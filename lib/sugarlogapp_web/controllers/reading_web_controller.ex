@@ -1,7 +1,7 @@
 defmodule SugarlogappWeb.ReadingWebController do    
     use SugarlogappWeb, :controller 
     
-    alias Sugarlogapp.Auth
+    # alias Sugarlogapp.Auth
     alias Sugarlogapp.Data
     alias Sugarlogapp.Data.Reading
     alias Sugarlogapp.Guardian
@@ -11,10 +11,24 @@ defmodule SugarlogappWeb.ReadingWebController do
     def index(conn, _params) do
         # get current user id        
         current_user = Guardian.Plug.current_resource(conn)
-        IO.puts inspect current_user.first_name
+        setting = get_session(conn, :setting)            
+        # IO.puts inspect setting.user_settings.reading_unit
+        
         readings = Data.get_readings(current_user.id)
-        render(conn, "index.html", readings: readings)
+        render(conn, "index.html", 
+                    readings: readings, 
+                    reading_unit: setting.user_settings.reading_unit)
     end 
+
+    def new(conn, _) do
+        changeset = Data.build_reading()       
+        render(conn, "new.html",
+                    reading: nil,
+                    reading_time_of_day: "",
+                    reading_notes: "",
+                    changeset: changeset, 
+                    mode: "Create")
+    end   
     
     def create(conn, %{"reading" => reading_params}) do
         current_user = Guardian.Plug.current_resource(conn)
@@ -27,7 +41,8 @@ defmodule SugarlogappWeb.ReadingWebController do
         reading_attributes = %{"user_id" => current_user.id,
                          "reading" => Map.get(reading_params, "reading"), 
                          "time_of_day" => Map.get(reading_params, "time_of_day"), 
-                         "reading_taken_dt" => reading_datetime} 
+                         "reading_taken_dt" => reading_datetime,
+                         "notes" => Map.get(reading_params, "notes")} 
 
         # try and create reading
         case Data.create_reading(reading_attributes) do
@@ -48,34 +63,10 @@ defmodule SugarlogappWeb.ReadingWebController do
 
         render(conn, "edit.html",   reading: reading, 
                                     reading_time_of_day: reading.time_of_day,
+                                    reading_notes: reading.notes,
                                     changeset: changeset, 
                                     mode: "Edit")
     end  
-
-    def new(conn, _) do
-        changeset = Data.build_reading()       
-        render(conn, "new.html",
-                    reading: nil,
-                    reading_time_of_day: "",
-                    changeset: changeset, 
-                    mode: "Create")
-    end   
-    
-    def delete(conn, %{"id" => id}) do
-        user = Guardian.Plug.current_resource(conn)
-
-        case Data.get_reading!(id, user.id) do
-            nil ->
-                conn
-                |> put_status(403)      
-                |> render( "forbidden.json", message: "You cannot delete readings you do not own")  
-            reading ->
-                with {:ok, %Reading{}} <- Data.delete_reading!(reading) do
-                    send_resp(conn, :no_content, "")
-                end
-        end    
-
-    end
 
     def update(conn, %{"id" => id, "reading" => reading_params}) do
         user = Guardian.Plug.current_resource(conn)
@@ -87,10 +78,10 @@ defmodule SugarlogappWeb.ReadingWebController do
         reading_attributes = %{"user_id" => user.id,
                     "reading" => Map.get(reading_params, "reading"), 
                     "time_of_day" => Map.get(reading_params, "time_of_day"), 
-                    "reading_taken_dt" => reading_datetime} 
+                    "reading_taken_dt" => reading_datetime,
+                    "notes" => Map.get(reading_params, "notes")} 
         
         case Data.get_reading(id, user.id) do
-            # { :ok, reading } ->
             reading ->    
                 case Data.update_reading!(reading, reading_attributes) do
                     {:ok, _reading} ->      
@@ -107,6 +98,22 @@ defmodule SugarlogappWeb.ReadingWebController do
         end    
 
     end    
+    
+    def delete(conn, %{"id" => id}) do
+        user = Guardian.Plug.current_resource(conn)
+
+        case Data.get_reading!(id, user.id) do
+            nil ->
+                conn
+                |> put_status(403)      
+                |> render( "forbidden.json", message: "You cannot delete readings you do not own")  
+            reading ->
+                with {:ok, %Reading{}} <- Data.delete_reading!(reading) do
+                    send_resp(conn, :no_content, "")
+                end
+        end    
+
+    end
 
     defp build_datetime(reading_date, reading_time) do
         # TODO : store users time zone offset from UTC in settings
