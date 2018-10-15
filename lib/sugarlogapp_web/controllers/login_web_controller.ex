@@ -24,7 +24,8 @@ defmodule SugarlogappWeb.LoginWebController do
 
                 conn
                 |> put_session(:setting, %{ current_user: user,
-                                            user_settings: user_settings 
+                                            user_settings: user_settings,
+                                            current_user_name: username
                     })
                 
                 |> Guardian.Plug.sign_in(user)

@@ -3,12 +3,14 @@ defmodule SugarlogappWeb.HomeController do
   
     plug :put_layout, "dashboard.html"
   
-    def index(conn, _params) do
-        # get the min, max and average of readings
-        
+    def action(conn, _) do
+        settings=get_session(conn, :setting)
+        args = [conn, conn.params,  settings.current_user_name]
+        apply(__MODULE__, action_name(conn), args)
+    end
 
-
-        render conn, "index.html"
+    def index(conn, _params, current_user_name) do
+        render conn, "index.html", current_user_name: current_user_name
     end
   end
   

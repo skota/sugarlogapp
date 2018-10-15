@@ -6,8 +6,14 @@ defmodule SugarlogappWeb.SettingsWebController do
     use Timex
     
     plug :put_layout, "dashboard.html"
+    
+    def action(conn, _) do
+      settings=get_session(conn, :setting)
+      args = [conn, conn.params,  settings.current_user_name]
+      apply(__MODULE__, action_name(conn), args)
+    end
 
-    def index(conn, _params) do 
+    def index(conn, _params, current_user_name) do 
       user = Guardian.Plug.current_resource(conn)
       
       setting = Data.get_setting(user.id)
@@ -21,7 +27,8 @@ defmodule SugarlogappWeb.SettingsWebController do
       changeset = Setting.blank_changeset(setting, %{})
       render conn, "form.html", changeset: changeset, 
                     setting: setting, 
-                    notification_setting: current_notification_setting
+                    notification_setting: current_notification_setting,
+                    current_user_name: current_user_name
     end  
     
     #only specific fields should be updateable    

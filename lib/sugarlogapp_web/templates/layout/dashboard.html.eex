@@ -62,7 +62,7 @@
               <figure class="image is-32x32" style="margin-right:.5em;">
                 <img src="https://avatars1.githubusercontent.com/u/7221389?v=4&s=32">
               </figure>
-              mazipan
+              <%= @current_user_name %>
             </a>
 
             <div class="navbar-dropdown is-right">
