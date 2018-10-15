@@ -1,3 +1,9 @@
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="/readings">Settings</a></li>
+    <li class="is-active"><a href="" aria-current="page">Edit</a></li>
+  </ul>
+</nav>
 <div class="column is-8">
     <div class="box">
         <%= form_for @changeset, settings_web_path(@conn, :update, @setting.id), fn f -> %>

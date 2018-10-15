@@ -1,3 +1,8 @@
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li class="is-active"><a href="#">Home</a></li>
+  </ul>
+</nav>
 <section class="section has-background-light">
     <div class="container">
         <div class="columns">

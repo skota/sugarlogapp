@@ -1,3 +1,8 @@
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li class="is-active"><a href="#" aria-current="page">Readings</a></li>
+  </ul>
+</nav>
 <%= if Enum.empty?(@readings) do %>
     <p><%= gettext("you have no readings.Create a <a href='/readings/new'>reading</a>")%> </p>
 <%= else %>
