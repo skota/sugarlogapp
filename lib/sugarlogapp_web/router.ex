@@ -64,9 +64,8 @@ defmodule SugarlogappWeb.Router do
     
     get "/settings", SettingsWebController, :index
     put "/setting/:id", SettingsWebController, :update
-    get "/*path", NorouteController, :index
+    # get "/*path", NorouteController, :index
   end  
-
 
   # Other scopes may use custom stacks.
   scope "/api", SugarlogappWeb do
@@ -102,4 +101,10 @@ defmodule SugarlogappWeb.Router do
     # reading_path  POST    /api/readings           SugarlogappWeb.ReadingController :create
   end  
   
+  
+  scope "/", SugarlogappWeb do
+    pipe_through(:browser)
+
+    get("/*path", PageController, :index)
+  end  
 end

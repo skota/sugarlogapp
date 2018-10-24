@@ -6,7 +6,7 @@
 </nav>
 <div class="column is-8">
     <div class="box">
-        <%= form_for @changeset, settings_web_path(@conn, :update, @setting.id), fn f -> %>
+        <%= form_for @changeset, settings_path(@conn, :update, @setting.id), fn f -> %>
             <div class="field">        
                 <%= label f, :notifications, class: "label" %>
                 <div class="control">
@@ -34,4 +34,4 @@
                 </div>
             </div>    
         <% end %>
-</div>
+</div> 

@@ -1,9 +1,0 @@
-/* This file is for your main application css. */
-
-@import "./phoenix.css";
-
-.large-text {
-    font-size: 5rem;
-    color: white;
-    font-weight: bold;
-}

@@ -11,7 +11,12 @@ config :sugarlogapp, SugarlogappWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
+  watchers: [npm: ["run", "serve", cd: Path.expand("../assets", __DIR__)]]
+
+  # kick of  npm run serve in the background...NOTE: before this step 
+  # do a "npm build" from assets dir, this creates the new build and copies to 
+  #priv/static
+  
 
 # ## SSL Support
 #
