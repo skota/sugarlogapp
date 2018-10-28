@@ -1,7 +1,0 @@
-<nav class="breadcrumb" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="#">Readings</a></li>
-    <li class="is-active"><a href="#" aria-current="page">New</a></li>
-  </ul>
-</nav>
-<%= render "form.html", Map.put(assigns, :action, reading_web_path(@conn, :create)) %>

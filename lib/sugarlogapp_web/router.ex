@@ -40,32 +40,32 @@ defmodule SugarlogappWeb.Router do
   end
   
   # browser routes
-  scope "/", SugarlogappWeb do
-    pipe_through :browser # Use the default browser stack
+  # scope "/", SugarlogappWeb do
+  #   pipe_through :browser # Use the default browser stack
 
-    get "/login", LoginWebController, :new  
-    post "/login", LoginWebController, :create  
-    get "/logout", LoginWebController, :logout  
+  #   get "/login", LoginWebController, :new  
+  #   post "/login", LoginWebController, :create  
+  #   get "/logout", LoginWebController, :logout  
     
-    # reset password
-    # get "/passchange", LoginController, :password_changed  
+  #   # reset password
+  #   # get "/passchange", LoginController, :password_changed  
     
-    get "/register", RegistrationWebController, :new  
-    post "/register", RegistrationWebController, :create  
-  end
+  #   get "/register", RegistrationWebController, :new  
+  #   post "/register", RegistrationWebController, :create  
+  # end
 
-  scope "/", SugarlogappWeb do
-    pipe_through [:browser_authenticate, :browser, :browser_session]
+  # scope "/", SugarlogappWeb do
+  #   pipe_through [:browser_authenticate, :browser, :browser_session]
     
-    get "/", HomeController, :index  
+  #   get "/", HomeController, :index  
     
-    # endpoints for readings
-    resources "/readings", ReadingWebController
+  #   # endpoints for readings
+  #   resources "/readings", ReadingWebController
     
-    get "/settings", SettingsWebController, :index
-    put "/setting/:id", SettingsWebController, :update
-    # get "/*path", NorouteController, :index
-  end  
+  #   get "/settings", SettingsWebController, :index
+  #   put "/setting/:id", SettingsWebController, :update
+  #   # get "/*path", NorouteController, :index
+  # end  
 
   # Other scopes may use custom stacks.
   scope "/api", SugarlogappWeb do
