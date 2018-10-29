@@ -4,6 +4,11 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Registration from './views/Register.vue'
 import RegistrationSuccess from './views/RegisterSuccessful.vue'
+import Secret from './views/Secret.vue'
+
+import LoginLayout  from './Login.vue';
+import DashboardLayout  from './Dashboard.vue';
+
 Vue.use(Router)
 
 function requireAuth (to, from, next) {
@@ -22,41 +27,59 @@ function requireAuth (to, from, next) {
 
 export default new Router({
   routes: [ 
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '/registed',
-      name: 'registration-success',
-      component: RegistrationSuccess
-    },
-
-    { path: '/logout',
-      beforeEnter (to, from, next) {
-        localStorage.removeItem('jwt');
-        next('/')
+      {
+        path: '/',
+        component: LoginLayout,
+        children: [
+          {
+            path: 'login',
+            component: Login,
+            name: 'Login',
+            meta: {description: 'Login page'}
+          }, {
+            path: 'register',
+            component: Registration,
+            name: 'Registration',
+            meta: {description: 'User registration'}
+          }, {
+            path: 'registered',
+            component: RegistrationSuccess,
+            name: 'User Registered',
+            meta: {description: 'Show after user successfully registered'}
+          },{
+            path: '/logout',
+              beforeEnter (to, from, next) {
+                localStorage.removeItem('jwt');
+                next('/login')
+              }
+          }
+        ]
+      },
+      {
+        path: '/',
+        component: DashboardLayout,
+        children: [
+          {
+            path: 'secret',
+            component: Secret,
+            name: 'Secret',
+            meta: {description: 'Dashboard page'}
+          }, 
+        ]
+      },
+      {
+        path: '/home',
+        name: 'home',
+        component: Home
+      },
+      {
+        path: '/about',
+        name: 'about',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+        beforeEnter:  requireAuth
       }
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: Registration
-    },
-    {
-      path: '/home',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
-      beforeEnter:  requireAuth
-    }
-  ]
+    ]
 })
