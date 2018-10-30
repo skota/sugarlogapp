@@ -69,32 +69,45 @@
 
       <div class="wrapper">
         <div class="columns">
-
-          <aside class="column is-2 aside menu">
-            <!-- <nav class="menu"> -->
+          <aside class="column is-2 aside">
+            <nav class="menu">
               <p class="menu-label">
                 General
               </p>
               <ul class="menu-list">
-                  <li >  
-                    <a href="#/sample1" v-on:click="setActive('settings')" :class="{ active: isActive('settings') }"><span class="icon is-small">
-                      <i class="fa fa-tachometer"></i></span>&nbsp;Settings
-                    </a>
-                  </li>  
-                    
-                  <li>  
-                    <a href="#/sample2" v-on:click="setActive('import')" :class="{ active: isActive('import') }"><span class="icon is-small">
-                      <i class="fa fa-tachometer"></i></span>&nbsp;Import
-                    </a>
-                  </li>  
-                  
-                  <li>  
-                    <a href="#/sample3" v-on:click="setActive('export')" :class="{ active: isActive('export') }"><span class="icon is-small">
-                      <i class="fa fa-tachometer"></i></span>&nbsp;Export
-                    </a>
-                  </li>  
+                <li>
+                  <router-link tag="li" to="#">
+                    <a><span class="icon is-small is-active"><i class="fa fa-tachometer"></i></span>Home</a>
+                  </router-link>
+                </li>
+
+                <li>
+                  <router-link tag="li" to="#">
+                    <a><span class="icon is-small"><i class="fa fa-tachometer"></i></span>Readings</a>
+                  </router-link>
+                </li>
+
+                <li>
+                  <router-link tag="li" to="#">
+                    <a><span class="icon is-small"><i class="fa fa-tachometer"></i></span>Settings</a>
+                  </router-link>
+                </li>
+
+                <li>
+                  <router-link tag="li" to="#">
+                    <a><span class="icon is-small"><i class="fa fa-tachometer"></i></span>Import</a>
+                  </router-link>
+                </li>
+                <li>
+                  <router-link tag="li" to="#">
+                    <a><span class="icon is-small"><i class="fa fa-tachometer"></i></span>Export</a>
+                  </router-link>
+                </li>
+
+
+
               </ul>
-            <!-- </nav> -->
+            </nav>
           </aside>
 
           <main class="column main">
@@ -236,18 +249,7 @@
 
 <script>
 export default {
-  name: 'Dashboard',
-  data() {
-    return { activeItem: 'settings' }
-  },
-  methods: {
-    isActive: function (menuItem) {
-      return this.activeItem === menuItem
-    },
-    setActive: function (menuItem) {
-      this.activeItem = menuItem // no need for Vue.set()
-    }
-  }
+  name: 'Dashboard'
 }
 </script>
 
@@ -321,13 +323,8 @@ export default {
   padding: 2em 0.2em 0 1em;
 }
 .aside a {
-  color: #afb8c3;
-  /* color: white; */
-}
-
-.aside a.hover {
-  color: greenyellow;
-  /* color: white; */
+  /* color: #afb8c3; */
+  color: white;
 }
 .aside .menu-list li {
   margin-top: 0.5em;
@@ -346,18 +343,17 @@ export default {
   margin-top: 0.5em;
 }
 
-.menu-list a.active {
-  background-color: #00d1b2;
-  color: #fff;
-  font-weight: 700;
-}
-
-.menu-list a:hover{
-  background-color: purple;
-  color: #fff;
+.menu-list a.is-active {
+  background-color: #00d1b2 !important;
+  color: #fff !important;
 }
 
 #navMenu {
     background-color: #2e363f;
+}
+
+nav a.router-link-active {
+    font-weight: 700; 
+    color: red;
 }
 </style>

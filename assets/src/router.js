@@ -6,6 +6,10 @@ import Registration from './views/Register.vue'
 import RegistrationSuccess from './views/RegisterSuccessful.vue'
 import Secret from './views/Secret.vue'
 
+import Sample1 from './views/Sample1.vue'
+import Sample2 from './views/Sample2.vue'
+import Sample3 from './views/Sample3.vue'
+
 import LoginLayout  from './Login.vue';
 import DashboardLayout  from './Dashboard.vue';
 
@@ -65,13 +69,29 @@ export default new Router({
             name: 'Secret',
             meta: {description: 'Dashboard page'}
           }, 
+          {
+            path: '/home',
+            name: 'home',
+            component: Home
+          },
+          {
+            path: '/sample1',
+            name: 'Sample1',
+            component: Sample1
+          },
+          {
+            path: '/sample2',
+            name: 'Sample2',
+            component: Sample2
+          },
+          {
+            path: '/sample3',
+            name: 'Sample3',
+            component: Sample3
+          },
         ]
       },
-      {
-        path: '/home',
-        name: 'home',
-        component: Home
-      },
+      
       {
         path: '/about',
         name: 'about',
