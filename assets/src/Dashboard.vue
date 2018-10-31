@@ -75,7 +75,7 @@
               <p class="menu-label">
                 General
               </p>
-              <ul class="menu-list">
+              <ul class="menu-list has-text-left">
 
                   <li >  
                     <a href="#/sample1" v-on:click="setActive('readings')" :class="{ active: isActive('readings') }">
@@ -117,6 +117,23 @@
                       </span>&nbsp;Export
                     </a>
                   </li>  
+                  
+                  <li>  
+                    <a href="#/sample3" v-on:click="setActive('contact')" :class="{ active: isActive('contact') }">
+                      <span class="icon is-small">
+                        <i class="fas fa-envelope-open"></i>
+                      </span>&nbsp;Contact us
+                    </a>
+                  </li>  
+
+
+                  <li>  
+                    <a href="#/sample3" v-on:click="setActive('logout')" :class="{ active: isActive('logout') }">
+                      <span class="icon is-small">
+                        <i class="fas fa-sign-out-alt"></i>
+                      </span>&nbsp;Logout
+                    </a>
+                  </li>  
               </ul>
             <!-- </nav> -->
           </aside>
@@ -132,7 +149,7 @@
             <div class="level">
               <div class="level-left">
                 <div class="level-item">
-                  <div class="title has-text-primary"><i class="fa fa-tachometer"></i> Dashboard</div>
+                  <div class="title has-text-primary"><i class="fas fa-tachometer-alt"></i>&nbsp;Dashboard</div>
                 </div>
               </div>
               <div class="level-right">
@@ -262,7 +279,7 @@
 export default {
   name: 'Dashboard',
   data() {
-    return { activeItem: 'settings' }
+    return { activeItem: 'readings' }
   },
   methods: {
     isActive: function (menuItem) {
@@ -346,6 +363,7 @@ export default {
 }
 .aside a {
   color: #afb8c3;
+  font-weight: 500;
   /* color: white; */
 }
 
@@ -378,6 +396,7 @@ export default {
 
 .menu-list a:hover{
   color: black;
+  font-weight: 500;
 }
 
 #navMenu {
