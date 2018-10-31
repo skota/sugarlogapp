@@ -76,21 +76,45 @@
                 General
               </p>
               <ul class="menu-list">
+
                   <li >  
-                    <a href="#/sample1" v-on:click="setActive('settings')" :class="{ active: isActive('settings') }"><span class="icon is-small">
-                      <i class="fa fa-tachometer"></i></span>&nbsp;Settings
+                    <a href="#/sample1" v-on:click="setActive('readings')" :class="{ active: isActive('readings') }">
+                      <span class="icon is-small">
+                        <i class="fas fa-pen-fancy"></i>
+                      </span>&nbsp;Readings
                     </a>
                   </li>  
+
+                  <li >  
+                    <a href="#/sample1" v-on:click="setActive('settings')" :class="{ active: isActive('settings') }">
+                      <span class="icon is-small">
+                        <i class="fas fa-file-import"></i>
+                      </span>&nbsp;Settings
+                    </a>
+                  </li>  
+                  
+                  <li >  
+                    <a href="#/sample1" v-on:click="setActive('profile')" :class="{ active: isActive('profile') }">
+                      <span class="icon is-small">
+                        <i class="far fa-user"></i> 
+                      </span>&nbsp;Profile
+                    </a>
+                  </li>  
+
                     
                   <li>  
-                    <a href="#/sample2" v-on:click="setActive('import')" :class="{ active: isActive('import') }"><span class="icon is-small">
-                      <i class="fa fa-tachometer"></i></span>&nbsp;Import
+                    <a href="#/sample2" v-on:click="setActive('import')" :class="{ active: isActive('import') }">
+                      <span class="icon is-small">
+                        <i class="fas fa-file-import"></i>
+                      </span>&nbsp;Import
                     </a>
                   </li>  
                   
                   <li>  
-                    <a href="#/sample3" v-on:click="setActive('export')" :class="{ active: isActive('export') }"><span class="icon is-small">
-                      <i class="fa fa-tachometer"></i></span>&nbsp;Export
+                    <a href="#/sample3" v-on:click="setActive('export')" :class="{ active: isActive('export') }">
+                      <span class="icon is-small">
+                        <i class="fas fa-file-export"></i>
+                      </span>&nbsp;Export
                     </a>
                   </li>  
               </ul>
@@ -353,8 +377,7 @@ export default {
 }
 
 .menu-list a:hover{
-  background-color: purple;
-  color: #fff;
+  color: black;
 }
 
 #navMenu {
