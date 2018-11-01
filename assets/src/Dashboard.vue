@@ -128,7 +128,7 @@
 
 
                   <li>  
-                    <a href="#/sample3" v-on:click="setActive('logout')" :class="{ active: isActive('logout') }">
+                    <a href="#/logout" v-on:click="setActive('logout')" :class="{ active: isActive('logout') }">
                       <span class="icon is-small">
                         <i class="fas fa-sign-out-alt"></i>
                       </span>&nbsp;Logout
