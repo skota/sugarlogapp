@@ -18,10 +18,14 @@ defmodule SugarlogappWeb.LoginController do
 
                 conn
                 |> render( "login.json", userid: user.id, jwt: token, exp: exp)
-            :error ->
+            :password_error ->
                 conn
                 |> put_status(401)
-                |> render("error.json", message: "Could not login. Invalid username or password")
+                |> render("error.json", message: "Password is invalid")
+            :user_not_found_error ->
+                conn
+                |> put_status(401)
+                |> render("error.json", message: "Invalid username or password")    
         end
       end 
 end

@@ -4,7 +4,7 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Registration from './views/Register.vue'
 import RegistrationSuccess from './views/RegisterSuccessful.vue'
-import Secret from './views/Secret.vue'
+import Dashboard from './views/Dashboard.vue'
 
 import Sample1 from './views/Sample1.vue'
 import Sample2 from './views/Sample2.vue'
@@ -15,22 +15,14 @@ import DashboardLayout  from './Dashboard.vue';
 
 Vue.use(Router)
 
-function requireAuth (to, from, next) {
-  //get value from localstorage
-  var secret_token = localStorage.hasOwnProperty('jwt') ? localStorage.getItem('jwt'): '';
-  
-  if (!secret_token && secret_token.length <= 0 ) {
-    //token exists next check if it is valid before proceeding
-    next({
-      path: '/login',
-    })
-  } else {
-    next()
-  }
-}
-
 export default new Router({
+  mode: 'history',
   routes: [ 
+      {
+        path: '/',
+        redirect: '/dashboard'
+      },
+
       {
         path: '/',
         component: LoginLayout,
@@ -64,30 +56,55 @@ export default new Router({
         component: DashboardLayout,
         children: [
           {
-            path: 'secret',
-            component: Secret,
-            name: 'Secret',
+            path: 'dashboard',
+            component: Dashboard,
+            name: 'Dashboard',
+            beforeEnter: (to, from, next) => {
+              const token = localStorage.getItem("jwt");
+              if (token) next('/dashboard');
+              else next('/login');
+            },  
             meta: {description: 'Dashboard page'}
           }, 
           {
             path: '/home',
             name: 'home',
+            beforeEnter: (to, from, next) => {
+              const token = localStorage.getItem("jwt");
+              if (token) next('/home');
+              else next('/login');
+            },  
             component: Home
           },
           {
             path: '/sample1',
             name: 'Sample1',
+            beforeEnter: (to, from, next) => {
+              const token = localStorage.getItem("jwt");
+              if (token) next('/sample1');
+              else next('/login');
+            },  
             component: Sample1
           },
           {
             path: '/sample2',
             name: 'Sample2',
+            beforeEnter: (to, from, next) => {
+              const token = localStorage.getItem("jwt");
+              if (token) next('/sample2');
+              else next('/login');
+            },  
             component: Sample2
           },
           {
             path: '/sample3',
             name: 'Sample3',
-            component: Sample3
+            beforeEnter: (to, from, next) => {
+              const token = localStorage.getItem("jwt");
+              if (token) next('/sample3');
+              else next('/login');
+            },  
+           component: Sample3
           },
         ]
       },
@@ -99,7 +116,6 @@ export default new Router({
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
-        beforeEnter:  requireAuth
       }
     ]
 })

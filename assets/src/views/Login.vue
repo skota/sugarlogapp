@@ -31,6 +31,9 @@
                         <div v-if="!passwordValid" >
                             <p class="help is-danger has-text-weight-semibold"> {{login_errors.password}}</p>
                         </div>
+                        <div v-if="login_error" >
+                            <p class="help is-danger has-text-weight-semibold"> {{error_message}}</p>
+                        </div>
                     </div>
                     <div class="field">
                         <label class="checkbox">
@@ -52,7 +55,7 @@
 
 
 <script>
-    // import router from '../router';
+    import router from '../router';
     import axios from 'axios';
 
     export default {
@@ -60,10 +63,14 @@
             return {
                     emailValid: true, //when false show error msg
                     passwordValid: true,
+                    error_message: null,
+                    login_error: false,
+                    
                     login : { 
                         email: "",
                         password: "",
-                    }   ,
+                    },
+                    
                     login_errors : { 
                             email:  null,
                             password: null,
@@ -108,29 +115,30 @@
                     
                 })
                 .catch((error)=> {
-                    console.log(error.response) // eslint-disable-line no-console
-                    var errors = Object.entries(error.response.data.errors);
-                    current.setErrorMessage(errors[0])
+                    // console.log(error.response) // eslint-disable-line no-console
+                    // console.log(error.response.data.message) // eslint-disable-line no-console
+                    current.login_error = true;
+                    current.error_message = error.response.data.message;
                 })
             },
 
             //TODO: 
-            setErrorMessage(errors) {
-                var field = errors[0];
-                var message = errors[1][0];
+            // setErrorMessage(errors) {
+            //     var field = errors[0];
+            //     var message = errors[1][0];
 
-                switch(field) {
-                    case 'email':
-                        this.emailValid =  false;
-                        this.login_errors.email = message;
-                        break;    
-                    case 'password':
-                        this.passwordValid =  false;
-                        this.login_errors.password = message;
-                        break;    
-                    default:
-                }
-            }
+            //     switch(field) {
+            //         case 'email':
+            //             this.emailValid =  false;
+            //             this.login_errors.email = message;
+            //             break;    
+            //         case 'password':
+            //             this.passwordValid =  false;
+            //             this.login_errors.password = message;
+            //             break;    
+            //         default:
+            //     }
+            // }
         }
     } 
 </script>

@@ -57,10 +57,12 @@ defmodule Sugarlogapp.Data do
                 user && Comeonin.Bcrypt.checkpw(pass, user.password_hash) ->
                     {:ok, user}
             true ->
-                :error
+                # password is incorrect
+                :password_error
             end
         else
-            :not_activated
+            # user not found
+            :user_not_found_error
         end        
     end
 
